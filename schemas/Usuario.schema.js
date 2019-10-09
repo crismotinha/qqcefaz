@@ -25,7 +25,7 @@ module.exports({
                     console.error(err);
                     
                 }
-                return resp;
+                return resp; //TODO: testar função
             }
         )
     }
