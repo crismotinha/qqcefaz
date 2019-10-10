@@ -3,7 +3,7 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
 }
 
 .dropdown-content {
@@ -32,7 +32,7 @@ a {
 .avatar-photo {
   margin-top: 5%;
   object-fit: cover;
-  border-radius:50%;
+  border-radius: 50%;
   width: 150px;
   height: 150px;
 }
@@ -43,4 +43,9 @@ a {
 .profile-name {
   font-size: larger;
   font-weight: bold;
+}
+
+/* Página de Login */
+.box {
+  margin: auto;
 }
