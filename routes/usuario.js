@@ -12,8 +12,8 @@ router.get("/cadastro", (req, res) => {
 });
 
 router.post("/cadastro", (req, res) => {
-  console.log(req);
-  res.json(req);
+  console.log(req.body.usuario);
+  res.json({teste: 'teste'});
 });
 
 module.exports = router;
