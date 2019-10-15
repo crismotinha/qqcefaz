@@ -1,12 +1,10 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 
-module.exports({
-    encriptarSenha: (senhaTexto) => {
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(senhaTexto, salt, (err, hash) => {
-                if (err) return err;
-                return hash;
-            })
-        })
-    }
-})
+module.exports = {
+  encriptarSenha: senhaTexto => {
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(senhaTexto, salt);
+    console.log(hash);
+    return hash;
+  }
+};

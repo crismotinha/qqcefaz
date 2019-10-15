@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const UsuarioController = require('../controllers/usuario.controller');
-
-
+const UsuarioController = require("../controllers/usuario.controller");
 
 /* GET users listing. */
 router.get("/", function(req, res, next) {
@@ -15,7 +13,7 @@ router.get("/cadastro", (req, res) => {
 });
 
 router.post("/cadastro", (req, res) => {
-  UsuarioController.cadastrarUsuario(req, res);
+  UsuarioController.createUsuario(req, res);
 });
 
 module.exports = router;
