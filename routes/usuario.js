@@ -1,5 +1,8 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
+const UsuarioController = require('../controllers/usuario.controller');
+
+
 
 /* GET users listing. */
 router.get("/", function(req, res, next) {
@@ -12,8 +15,7 @@ router.get("/cadastro", (req, res) => {
 });
 
 router.post("/cadastro", (req, res) => {
-  console.log(req.body.usuario);
-  res.json({teste: 'teste'});
+  UsuarioController.cadastrarUsuario(req, res);
 });
 
 module.exports = router;

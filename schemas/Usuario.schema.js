@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-const database = require('../services/database.services');
+//const database = require('../services/database.services');
 
 const Schema = mongoose.Schema;
 const Model = mongoose.Model();
-const connection = database.dbConnect;
+//const connection = database.dbConnect;
 
 const Usuario = Model('Usuario', new Schema({
     nome: String,
