@@ -1,0 +1,46 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.dropdown-content {
+  left: auto !important;
+  right: 0px !important;
+  width: auto !important;
+}
+
+.dropdown-title {
+  padding: 14px 16px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.imagem {
+  height: 45vw !important;
+  object-fit: cover !important;
+}
+
+.card-content a {
+  font-size: larger;
+  padding-bottom: 10%;
+  display: inline-block;
+}
+
+.avatar-photo {
+  margin-top: 5%;
+  object-fit: cover;
+  border-radius:50%;
+  width: 150px;
+  height: 150px;
+}
+.profile {
+  padding-left: 5%;
+  line-height: 30px !important;
+}
+.profile-name {
+  font-size: larger;
+  font-weight: bold;
+}
