@@ -1,13 +1,13 @@
 <h4>Cadastro de Usuário</h4>
 
-<form id="form-cadastro" method="post" action="/usuario/cadastro">
+<form id="form-cadastro" method="post" action="/usuario/cadastro" enctype="multipart/form-data">
     <div>
-        <label for="foto-usuario">Rostinho bonito de deus: </label>
-        <input type="file" name="foto-usuario" placeholder="único no mundo">
+        <label for="foto">Rostinho bonito de deus: </label>
+        <input type="file" name="foto">
     </div>
     <div>
         <label for="nome-usuario">Nome:</label>
-        <input type="text" name="nome" placeholder="Qual o nome da bonita?">
+        <input type="text" name="nome" placeholder="O que mamãe te deu">
     </div>
     <div>
         <label for="email-usuario">E-mail:</label>

@@ -6,25 +6,30 @@ const Usuario = mongoose.model(
   "Usuario",
   new mongoose.Schema({
     nome: String,
-    email: String,
+    email: { type: String, unique: true },
     senha: String,
     token: String,
-    usuario: String
+    usuario: String,
+    excluido: Boolean,
+    foto: String
   })
 );
 
 module.exports = {
   Usuario: Usuario,
   cadastrarUsuario: (novoUsuario, upsert = false) => {
-    return novoUsuario.save().then((err, resp) => {
-      if (err) return err;
-      return resp;
+    let aux;
+    novoUsuario.save().then((err, resp) => {
+      if (err) return (aux = err);
+      return (aux = resp);
     });
+    return aux;
   },
   procuraUsuario: email => {
     return User.find({ email: email }).exec(result => {
       console.log(result);
       return result;
     });
-  }
+  },
+  desativaUsuario: null
 };

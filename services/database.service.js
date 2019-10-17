@@ -7,6 +7,7 @@ const url = process.env.DB_URL;
 
 module.exports = {
   dbConnect: mongoose.connect(`mongodb+srv://${user}:${password}@${url}`, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
   })
 };
