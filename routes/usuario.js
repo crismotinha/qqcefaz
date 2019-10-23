@@ -17,4 +17,9 @@ router.post("/cadastro", upload.single("foto"), (req, res) => {
   UsuarioController.createUsuario(req, res, req.file);
 });
 
+router.get('/perfil/:usuario', (req, res) => {
+  console.log(req);
+  UsuarioController.procuraUsuario(req, res);
+});
+
 module.exports = router;

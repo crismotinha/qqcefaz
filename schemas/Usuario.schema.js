@@ -25,8 +25,8 @@ module.exports = {
     });
     return aux;
   },
-  procuraUsuario: email => {
-    return User.find({ email: email }).exec(result => {
+  procuraUsuario: usuario => {
+    return Usuario.find({ usuario: usuario }).exec(result => {
       console.log(result);
       return result;
     });

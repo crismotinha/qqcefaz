@@ -20,5 +20,13 @@ module.exports = {
     console.log("objeto do usuario: ${novoUsuario}");
 
     res.json(novoUsuario);
+  },
+  procuraUsuario: (req, res) => {
+    Usuario.findOne({usuario: req.params.usuario})
+    .exec((err, usuario) => {
+      if (err) res.status(400).send('Usuário não existe');
+      res.render('usuario/cadastro', {title: perfil, usuario: usuario})
+    });
+    ;
   }
 };
