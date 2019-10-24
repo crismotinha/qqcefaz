@@ -5,6 +5,18 @@ const s3 = require("../services/s3.service");
 const Usuario = UsuarioModel.Usuario;
 
 module.exports = {
+  login: (req, res) => {
+    Usuario.findOne({ email: req.body.email }).exec((err, usuario) => {
+      if (err) res.status(404).send({ message: "Não achou" });
+      console.log(
+        "checagem: " + encrypter.validarSenha(req.body.senha, usuario.senha)
+      );
+
+      if (encrypter.validarSenha(req.body.senha, usuario.senha)) {
+        res.redirect(`/usuario/${usuario.usuario}`);
+      }
+    });
+  },
   createUsuario: (req, res, file) => {
     let novoUsuario = new Usuario();
 
@@ -22,11 +34,27 @@ module.exports = {
     res.json(novoUsuario);
   },
   procuraUsuario: (req, res) => {
-    Usuario.findOne({usuario: req.params.usuario})
-    .exec((err, usuario) => {
-      if (err) res.status(400).send('Usuário não existe');
-      res.render('usuario/cadastro', {title: perfil, usuario: usuario})
+    Usuario.findOne({ usuario: req.params.usuario }).exec((err, usuario) => {
+      if (err) res.status(404).send("Usuário não existe");
+      res.render("usuario/perfil", {
+        title: "Perfil",
+        foto: usuario.foto,
+        nome: usuario.nome,
+        usuario: usuario.usuario,
+        email: usuario.email
+      });
     });
-    ;
+  },
+  editarUsuario: (req, res) => {
+    Usuario.findOne({ usuario: req.params.usuario }).exec((err, usuario) => {
+      if (err) res.status(404).send("Usuário não existe");
+      res.render("usuario/editar", {
+        title: "Perfil",
+        foto: usuario.foto,
+        nome: usuario.nome,
+        usuario: usuario.usuario,
+        email: usuario.email
+      });
+    });
   }
 };

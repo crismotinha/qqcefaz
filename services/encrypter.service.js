@@ -6,5 +6,8 @@ module.exports = {
     var hash = bcrypt.hashSync(senhaTexto, salt);
     console.log(hash);
     return hash;
+  },
+  validarSenha: (senhaTexto, senhaHash) => {
+    return bcrypt.compareSync(senhaTexto, senhaHash);
   }
 };
