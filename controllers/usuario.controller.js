@@ -11,8 +11,20 @@ module.exports = {
       console.log(
         "checagem: " + encrypter.validarSenha(req.body.senha, usuario.senha)
       );
-
-      if (encrypter.validarSenha(req.body.senha, usuario.senha)) {
+      const usuarioValido = encrypter.validarSenha(
+        req.body.senha,
+        usuario.senha
+      );
+      if (!usuarioValido) {
+        console.log("não validado");
+        //TODO: Essa porra não manda pro caralho do root
+        res.render("login", {
+          title: "login",
+          email: req.body.email,
+          mensagem: "Não foi possível fazer login."
+        });
+      } else {
+        console.log("validado");
         res.redirect(`/usuario/${usuario.usuario}`);
       }
     });
