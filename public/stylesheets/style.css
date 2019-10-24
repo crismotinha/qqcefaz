@@ -1,32 +1,26 @@
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* Tem mtos importants nesse css */
+/* GLOBAL STYLE */
+* {
+  font-family: "Questrial", "Helvetica", "Lucida Grande", sans-serif;
+  font-weight: 500;
 }
 
-a {
-  color: #00B7FF;
+:root {
+  --primary-color: #3D155F;
+  --secondary-color: #01A39D;
+  --warning-color: #FE3961;
+  --font-raleway: "Raleway";
 }
 
-.dropdown-content {
-  left: auto !important;
-  right: 0px !important;
-  width: auto !important;
+
+/* SIDEBAR */
+nav {
+  background: var(--primary-color);
 }
 
-.dropdown-title {
-  padding: 14px 16px;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.imagem {
-  height: 45vw !important;
-  object-fit: cover !important;
-}
-
-.card-content a {
-  font-size: larger;
-  padding-bottom: 10%;
-  display: inline-block;
+.qqcefaz-nav-title {
+  font-weight: 800;
+  text-shadow: black 1cm;
 }
 
 .avatar-photo {
@@ -36,11 +30,58 @@ a {
   width: 150px;
   height: 150px;
 }
+
 .profile {
   padding-left: 5%;
   line-height: 30px !important;
 }
+
 .profile-name {
   font-size: larger;
   font-weight: bold;
+}
+
+.orderby {
+  margin-right: 18px;
+}
+
+.dropdown-content {
+  left: auto !important;
+  right: 0px !important;
+  width: auto !important;
+  color: var(--secondary-color);
+}
+
+.dropdown-title {
+  padding: 14px 16px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* HOME PAGE */
+
+.home-img-card {
+  height: 45vw !important;
+  object-fit: cover !important;
+}
+
+.home-card-title {
+  background-color: var(--secondary-color);
+  border-radius: 15%;
+  padding: 3px 8px 3px 8px !important;
+  margin: 8px !important;
+  font-size: 16px !important;
+}
+
+.card-content a {
+  display: inline-block;
+}
+
+.home-title-product {
+  font-weight: 700;
+  font-family: var(--font-raleway);
+}
+
+.home-subtitle-product a {
+  color: var(--secondary-color);
 }
