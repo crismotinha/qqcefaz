@@ -1,18 +1,25 @@
-<h1>Login</h1>
-<div class="materialContainer">
-    <div class="box">
-        <span>{{mensagem}}</span>
+{{!-- TODO: não sei como colocar um espaço aqui, mas seria legal uma margem pra não encostar a box no topo --}}
+<div class="valign-wrapper row login-box qqcefaz-login">
+    <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
         <form action="/usuario/login" method="POST">
-            <div>
-                <label for="email-login">E-mail:</label>
-                <input type="email" name="email" placeholder="e-mail lindo" value="{{email}}">
+            <div class="card-content">
+                <span class="card-title">Olá de novo! Faça seu login:</span>
+                {{!-- <span class="card-title">{{mensagem}}</span> --}}
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label for="email">E-mail:</label>
+                        <input type="email" name="email" id="email" class="validate" placeholder="e-mail lindo"
+                            value="{{email}}">
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="password">Senha:</label>
+                        <input type="password" class="validate" name="password" id="password"
+                            placeholder="senha super secreta">
+                    </div>
+                </div>
             </div>
-            <div>
-                <label for="senha-login">Senha:</label>
-                <input type="password" name="senha" placeholder="senha super secreta">
-            </div>
-            <div>
-                <input type="submit" value="Login">
+            <div class="card-action right-align">
+                <input type="submit" class="btn waves-effect waves-light center-align" value="Login">
             </div>
         </form>
     </div>

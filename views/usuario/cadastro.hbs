@@ -1,25 +1,45 @@
-<h4>Cadastro de Usuário</h4>
-
-<form id="form-cadastro" method="post" action="/usuario/cadastro" enctype="multipart/form-data">
-    <div>
-        <label for="foto">Rostinho bonito de deus: </label>
-        <input type="file" name="foto">
+{{!-- TODO: não sei como colocar um espaço aqui, mas seria legal uma margem pra não encostar a box no topo --}}
+{{!-- TODO: Como colocar o background roxo em Login e Cadastro sem afetar as outras paginas --}}
+<div class="valign-wrapper row login-box qqcefaz-login">
+    <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
+        <form id="form-cadastro" method="post" action="/usuario/cadastro" enctype="multipart/form-data">
+            <div class="card-content">
+                <span class="card-title">Prazer te conhecer! Realize seu cadastro:</span>
+                {{!-- <span class="card-title">{{mensagem}}</span> --}}
+                <div class="row">
+                    <div class="input-field col s12">
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Escolha uma foto</span>
+                                <input type="file" name="foto">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="nome-usuario">Nome:</label>
+                        <input type="text" class="validate" name="nome" id="nome" placeholder="O que mamãe te deu">
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="email-usuario">Email:</label>
+                        <input type="email" class="validate" name="email" id="email"
+                            placeholder="Nos passe seu melhor e-mail">
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="senha-usuario">Senha:</label>
+                        <input type="password" class="validate" name="senha" id="senha" placeholder="secretíssima">
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="usuario">Usuário:</label>
+                        <input type="text" class="validate" name="usuario" id="usuario" placeholder="único no mundo">
+                    </div>
+                </div>
+            </div>
+            <div class="card-action right-align">
+                <input type="submit" class="btn waves-effect waves-light" value="Cadastrar">
+            </div>
+        </form>
     </div>
-    <div>
-        <label for="nome-usuario">Nome:</label>
-        <input type="text" name="nome" placeholder="O que mamãe te deu">
-    </div>
-    <div>
-        <label for="email-usuario">E-mail:</label>
-        <input type="email" name="email" placeholder="Nos passe seu melhor e-mail">
-    </div>
-    <div>
-        <label for="senha-usuario">Senha:</label>
-        <input type="password" name="senha" placeholder="secretissima">
-    </div>
-    <div>
-        <label for="usuario">Usuário:</label>
-        <input type="text" name="usuario" placeholder="único no mundo">
-    </div>
-    <button type="submit">Enviar</button>
-</form>
+</div>
