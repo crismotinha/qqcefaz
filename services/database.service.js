@@ -6,9 +6,9 @@ const password = process.env.DB_PASSWORD;
 const url = process.env.DB_URL;
 
 mongoose.connect(`mongodb+srv://${user}:${password}@${url}`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 module.exports = {
   dbConnect: mongoose.connection

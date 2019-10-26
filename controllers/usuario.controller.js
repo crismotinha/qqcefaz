@@ -1,14 +1,14 @@
 const UsuarioModel = require("../schemas/Usuario.schema");
 const encrypter = require("../services/encrypter.service");
 const s3 = require("../services/s3.service");
-const jwt = require('../services/jwt.service');
+const jwt = require("../services/jwt.service");
 
 const Usuario = UsuarioModel.Usuario;
 
 module.exports = {
   login: (req, res) => {
     Usuario.findOne({ email: req.body.email }).exec((err, usuario) => {
-      if (err || !usuario){
+      if (err || !usuario) {
         res.render("login", {
           title: "login",
           email: req.body.email,
@@ -21,7 +21,10 @@ module.exports = {
         usuario.senha
       );
 
+      //TODO: encriptar senha no front
       if (!usuarioValido) {
+        console.log(req.body.senha);
+
         console.log("não validado");
         //TODO: Essa porra não manda pro caralho do root
         res.render("login", {
@@ -33,14 +36,18 @@ module.exports = {
         console.log("validado");
         const token = jwt.gerarToken(req.body.email);
         console.log(token);
-        res.cookie('token', token);
-        res.cookie('usuario', usuario.usuario);
+        res.cookie("token", token);
+        res.cookie("usuario", usuario.usuario);
 
         res.redirect(`/usuario/${usuario.usuario}`);
       }
     });
   },
   createUsuario: (req, res, file) => {
+    //TODO: checar e-mail
+    //TODO: checar senha
+    //TODO: checar usuario
+    //TODO: Restringir criação de mais de um usuario com o mesmo nome
     let novoUsuario = new Usuario();
 
     novoUsuario.nome = req.body.nome;
@@ -54,26 +61,42 @@ module.exports = {
     console.log("url da foto: ${file.location}");
     console.log("objeto do usuario: ${novoUsuario}");
 
-    res.json(novoUsuario);
+    res.redirect(`/usuario/${usuario.usuario}`);
   },
   procuraUsuario: (req, res) => {
-    const tokenEmail = jwt.verificarToken(req.cookies.token);
+    // const tokenEmail = jwt.verificarToken(req.cookies.token);
 
-    console.log(req.cookies);
-    
+    // console.log(req.cookies);
+
+    // Usuario.findOne({ usuario: req.params.usuario }).exec((err, usuario) => {
+    //   if (err) {
+    //     res.status(404).send("Usuário não existe");
+    //   } else if (usuario.email == tokenEmail.email) {
+    //     res.render("usuario/perfil", {
+    //       title: "Perfil",
+    //       foto: usuario.foto,
+    //       nome: usuario.nome,
+    //       usuario: usuario.usuario,
+    //       email: usuario.email
+    //     });
+    //   } else {
+    //     res.redirect(`${req.cookies.usuario}`);
+    //   }
+    // });
 
     Usuario.findOne({ usuario: req.params.usuario }).exec((err, usuario) => {
-      if (err) { res.status(404).send("Usuário não existe");}
-     else if (usuario.email == tokenEmail.email){  
-      res.render("usuario/perfil", {
-        title: "Perfil",
-        foto: usuario.foto,
-        nome: usuario.nome,
-        usuario: usuario.usuario,
-        email: usuario.email
-      });}
-      else {
-        res.redirect(`${req.cookies.usuario}`);
+      if (err) {
+        res.status(404).send("Usuário não existe");
+      } else if (usuario) {
+        res.render("usuario/perfil", {
+          title: "Perfil",
+          foto: usuario.foto,
+          nome: usuario.nome,
+          usuario: usuario.usuario,
+          email: usuario.email
+        });
+      } else {
+        res.redirect("/login");
       }
     });
   },
@@ -88,6 +111,20 @@ module.exports = {
         usuario: usuario.usuario,
         email: usuario.email
       });
+    });
+  },
+  deletarUsuario: (req, res) => {
+    Usuario.deleteOne({ usuario: req.params.usuario }, err => {
+      console.log("entrou na função de exlusao");
+
+      if (err) {
+        res.redirect(`/${req.params.usuario}`, {
+          mensagem: "Não foi possível excluir o usuário.",
+          title: "Perfil"
+        });
+      } else {
+        res.redirect("/login");
+      }
     });
   }
 };

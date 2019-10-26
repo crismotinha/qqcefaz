@@ -8,6 +8,11 @@ module.exports = {
     return hash;
   },
   validarSenha: (senhaTexto, senhaHash) => {
-    return bcrypt.compareSync(senhaTexto, senhaHash);
+    try {
+      return bcrypt.compareSync(senhaTexto, senhaHash);
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
   }
 };
