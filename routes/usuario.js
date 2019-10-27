@@ -3,21 +3,31 @@ const router = express.Router();
 const UsuarioController = require("../controllers/usuario.controller");
 const upload = require("../services/s3.service").multer;
 
+router.post("/emailexiste/", (req, res) => {
+  console.log("entrou no email");
+  UsuarioController.procuraEmail(req, res);
+});
+
+router.post("/usuarioexiste/", (req, res) => {
+  console.log("entrou no email");
+  UsuarioController.procuraUsuario(req, res);
+});
+
 /* GET users listing. */
 router.get("/", function(req, res, next) {
   res.render("usuarios");
 });
 
-/* POST login do usuário */
+// /* POST login do usuário */
 
-router.post("/login", (req, res) => {
-  UsuarioController.login(req, res);
-});
+// router.post("/login", (req, res) => {
+//   UsuarioController.login(req, res);
+// });
 
-/* GET para login caso caia em /usuario/login */
-router.get("/login", (req, res) => {
-  res.render("login");
-});
+// /* GET para login caso caia em /usuario/login */
+// router.get("/login", (req, res) => {
+//   res.render("login");
+// });
 
 /* GET cadastro do usuário */
 router.get("/cadastro", (req, res) => {
@@ -45,4 +55,5 @@ router.get("/:usuario/excluir", (req, res) => {
 
   UsuarioController.deletarUsuario(req, res);
 });
+
 module.exports = router;

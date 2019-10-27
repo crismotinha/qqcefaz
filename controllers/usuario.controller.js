@@ -126,5 +126,31 @@ module.exports = {
         res.redirect("/login");
       }
     });
+  },
+  procuraEmail: (req, res) => {
+    console.log(req.body);
+
+    Usuario.find({ email: req.body.email })
+      .select("email -_id")
+      .exec((err, email) => {
+        if (err || email.toString() === "") {
+          res.json({ existe: false });
+        } else {
+          res.json({ existe: true });
+        }
+      });
+  },
+  procuraUsuario: (req, res) => {
+    console.log(req.body);
+
+    Usuario.find({ usuario: req.body.usuario })
+      .select("email -_id")
+      .exec((err, usuario) => {
+        if (err || usuario.toString() === "") {
+          res.json({ existe: false });
+        } else {
+          res.json({ existe: true });
+        }
+      });
   }
 };

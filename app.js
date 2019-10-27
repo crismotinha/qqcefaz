@@ -18,8 +18,8 @@ app.set("views", [
 app.set("view engine", "hbs");
 
 app.use(logger("dev"));
-var hbs = require('hbs');
-hbs.registerPartials(path.join(__dirname + '/views/partials'));
+var hbs = require("hbs");
+hbs.registerPartials(path.join(__dirname + "/views/partials"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

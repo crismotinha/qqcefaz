@@ -1,7 +1,7 @@
 {{!-- TODO: não sei como colocar um espaço aqui, mas seria legal uma margem pra não encostar a box no topo --}}
 <div class="valign-wrapper row login-box qqcefaz-login">
     <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
-        <form action="/usuario/login" method="POST">
+        <form action="/usuario/login" method="POST" id="form-login">
             <div class="card-content">
                 <span class="card-title">Olá de novo! Faça seu login:</span>
                 <span class="card-title">{{mensagem}}</span>
@@ -24,3 +24,5 @@
         </form>
     </div>
 </div>
+
+<button onclick="test()">Clique aqui!</button>
