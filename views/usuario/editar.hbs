@@ -1,0 +1,26 @@
+<h4>Edição de Usuário</h4>
+
+<form id="form-cadastro" method="post" action="/usuario/editar" enctype="multipart/form-data">
+    <div>
+        <img src="{{foto}}" style="max-width: 30%; border-radius: 50%">
+        <label for="foto">Rostinho bonito de deus: </label>
+        <input type="file" name="foto">
+    </div>
+    <div>
+        <label for="nome-usuario">Nome:</label>
+        <input type="text" name="nome" value="{{nome}}">
+    </div>
+    <div>
+        <label for="email-usuario">E-mail:</label>
+        <input type="email" name="email" value="{{email}}l">
+    </div>
+    <div>
+        <label for="senha-usuario">Senha:</label>
+        <input type="password" name="senha" placeholder="secretissima">
+    </div>
+    <div style="background-color: gray;">
+        <label for="usuario">Usuário:</label>
+        <input type="text" name="usuario" value="{{usuario}}" readonly>
+    </div>
+    <button type="submit">Enviar</button>
+</form>
