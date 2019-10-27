@@ -1,5 +1,49 @@
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* Tem mtos importants nesse css */
+/* GLOBAL STYLE */
+* {
+  font-family: "Questrial", "Helvetica", "Lucida Grande", sans-serif;
+  font-weight: 500;
+}
+
+:root {
+  --primary-color: #3D155F;
+  --secondary-color: #01A39D;
+  --warning-color: #FE3961;
+  --font-raleway: "Raleway";
+}
+
+
+/* SIDEBAR */
+nav {
+  background: var(--primary-color);
+}
+
+.qqcefaz-nav-title {
+  font-weight: 800;
+  text-shadow: black 1cm;
+}
+
+.avatar-photo {
+  margin-top: 5%;
+  object-fit: cover;
+  border-radius:50%;
+  width: 150px;
+  height: 150px;
+}
+
+.profile {
+  padding-left: 5%;
+  line-height: 30px !important;
+}
+
+.profile-name {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.orderby {
+  margin-right: 18px;
+
 }
 
 a {
@@ -10,6 +54,7 @@ a {
   left: auto !important;
   right: 0px !important;
   width: auto !important;
+  color: var(--secondary-color);
 }
 
 .dropdown-title {
@@ -18,15 +63,28 @@ a {
   font-size: 18px;
 }
 
-.imagem {
+/* HOME PAGE */
+
+.home-img-card {
   height: 45vw !important;
   object-fit: cover !important;
 }
 
+.home-card-title {
+  background-color: var(--secondary-color);
+  border-radius: 15%;
+  padding: 3px 8px 3px 8px !important;
+  margin: 8px !important;
+  font-size: 16px !important;
+}
+
 .card-content a {
-  font-size: larger;
-  padding-bottom: 10%;
   display: inline-block;
+}
+
+.home-title-product {
+  font-weight: 700;
+  font-family: var(--font-raleway);
 }
 
 .avatar-photo {
@@ -36,10 +94,11 @@ a {
   width: 150px;
   height: 150px;
 }
-.profile {
-  padding-left: 5%;
-  line-height: 30px !important;
+
+.home-subtitle-product a {
+  color: var(--secondary-color);
 }
+
 .profile-name {
   font-size: larger;
   font-weight: bold;
