@@ -36,6 +36,7 @@ router.get("/cadastro", (req, res) => {
 
 /* POST cadastro do usuário */
 router.post("/cadastro", upload.single("foto"), (req, res) => {
+  console.log(req.body);
   UsuarioController.createUsuario(req, res, req.file);
 });
 

@@ -62,6 +62,26 @@ module.exports = {
     console.log("objeto do usuario: ${novoUsuario}");
 
     res.redirect(`/usuario/${usuario.usuario}`);
+
+    // Usuario.findOne({ email: usuario.email })
+    //   .select("email -_id")
+    //   .exec((err, usuarioEmail) => {
+    //     if (err) {
+    //       console.log("entou no if do erro");
+
+    //       res.json(err);
+    //     } else {
+    //       console.log("entrou no else da pesquisa");
+
+    //       if (usuarioEmail.email == usuario.email) {
+    //         res.redirect("/cadastro", {
+    //           title: cadastro,
+    //           campoNome: usuario.nome,
+    //           mensagemUsuario: "Este usuário já está cadastrado"
+    //         });
+    //       }
+    //     }
+    //   });
   },
   procuraUsuario: (req, res) => {
     // const tokenEmail = jwt.verificarToken(req.cookies.token);

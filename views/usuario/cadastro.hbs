@@ -21,10 +21,10 @@
                     <div class="input-field col s12">
                         <label for="nome-usuario">Nome:</label>
                         <input type="text" class="validate" name="nome" id="nome" placeholder="O que mamãe te deu"
-                            required>
+                            value="{{campoNome}}" required>
                     </div>
                     <div class="input-field col s12">
-                        <span id="cadastro-mensagem-email" class="red"></span>
+                        <span id="cadastro-mensagem-email" class="red">{{mensagem-email}}</span>
                         <label for="email-usuario">Email:</label>
                         <input type="email" class="validate" name="email" id="cadastro-email"
                             placeholder="Nos passe seu melhor e-mail" required>
@@ -36,7 +36,7 @@
                             id="cadastro-senha" required>
                     </div>
                     <div class="input-field col s12">
-                        <span id="cadastro-mensagem-usuario" class="red"></span>
+                        <span id="cadastro-mensagem-usuario" class="red">{{mensagemUsuario}}</span>
                         <label for="usuario">Usuário:</label>
                         <input type="text" class="validate" name="usuario" id="cadastro-usuario"
                             placeholder="único no mundo" required>
@@ -71,31 +71,39 @@
             }
         });
     });
-
-    $("#cadastro-usuario").focusout((e) => {
-        console.log($("#cadastro-usuario").val());
+    $("#cadastro-email").focusout((e) => {
+        console.log(e);
         $.ajax({
             type: "POST",
-            url: "/usuario/usuarioexiste",
+            url: "/usuario/emailexiste",
             data: {
-                usuario: $("#cadastro-usuario").val()
+                email: $("#cadastro-email").val()
             }
         }).done(d => {
-            if (d.existe) {
-                $("#cadastro-mensagem-usuario").html("Usuário já cadastrado.");
-            } else {
-                $("#cadastro-mensagem-usuario").html("");
-            }
-        });
-    });
+            $("#cadastro-usuario").focusout((e) => {
+                console.log($("#cadastro-usuario").val());
+                $.ajax({
+                    type: "POST",
+                    url: "/usuario/usuarioexiste",
+                    data: {
+                        usuario: $("#cadastro-usuario").val()
+                    }
+                }).done(d => {
+                    if (d.existe) {
+                        $("#cadastro-mensagem-usuario").html("Usuário já cadastrado.");
+                    } else {
+                        $("#cadastro-mensagem-usuario").html("");
+                    }
+                });
+            });
 
-    $("#cadastro-senha").focusout(() => {
-        if ($("#cadastro-senha").val().toString().length < 6) {
-            console.log("Entrou no if");
-            $("#cadastro-mensagem-senha").html("A senha precisa ter 6 caracteres");
-        } else {
-            console.log("Entrou no else");
-            $("#cadastro-mensagem-senha").html("");
-        }
-    });
+            $("#cadastro-senha").focusout(() => {
+                if ($("#cadastro-senha").val().toString().length < 6) {
+                    console.log("Entrou no if");
+                    $("#cadastro-mensagem-senha").html("A senha precisa ter 6 caracteres");
+                } else {
+                    console.log("Entrou no else");
+                    $("#cadastro-mensagem-senha").html("");
+                }
+            });
 </script>
