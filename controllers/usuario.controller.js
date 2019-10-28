@@ -35,11 +35,9 @@ module.exports = {
       } else {
         console.log("validado");
         const token = jwt.gerarToken(req.body.email);
-        console.log(token);
         res.cookie("token", token);
-        res.cookie("usuario", usuario.usuario);
 
-        res.redirect(`/usuario/${usuario.usuario}`);
+        res.redirect(`${usuario.usuario}`);
       }
     });
   },
@@ -48,6 +46,7 @@ module.exports = {
     //TODO: checar senha
     //TODO: checar usuario
     //TODO: Restringir criação de mais de um usuario com o mesmo nome
+
     let novoUsuario = new Usuario();
 
     novoUsuario.nome = req.body.nome;
@@ -58,12 +57,20 @@ module.exports = {
 
     let aux = UsuarioModel.cadastrarUsuario(novoUsuario);
 
-    console.log("url da foto: ${file.location}");
-    console.log("objeto do usuario: ${novoUsuario}");
+    console.log(`url da foto: ${file.location}`);
+    console.log(`objeto do usuario: ${novoUsuario}`);
 
-    res.redirect(`/usuario/${usuario.usuario}`);
+    const token = jwt.gerarToken(req.body.email);
+
+    console.log(token);
+    res.cookie("token", token);
+
+    res.redirect(`/usuario/${novoUsuario.usuario}`);
   },
   procuraUsuario: (req, res) => {
+
+    console.log('entrou no procura');
+    
     // const tokenEmail = jwt.verificarToken(req.cookies.token);
 
     // console.log(req.cookies);
@@ -140,7 +147,7 @@ module.exports = {
         }
       });
   },
-  procuraUsuario: (req, res) => {
+  procuraUsuarioExiste: (req, res) => {
     console.log(req.body);
 
     Usuario.find({ usuario: req.body.usuario })
@@ -152,5 +159,20 @@ module.exports = {
           res.json({ existe: true });
         }
       });
+  },
+  informacoesNavbar: (req, res) => {
+
+    let tokenTraduzido = jwt.verificarToken(req.body.token);
+    Usuario.findOne({email: tokenTraduzido.email})
+    .select("foto nome email -_id")
+    .exec((err, usuario) => {
+      if (err || !usuario) {
+        res.json({foto: null, email: null, nome: null});
+      }
+      else {
+        console.log(usuario);
+        res.json({foto: usuario.foto, nome: usuario.nome, email: usuario.email});
+      }
+    })
   }
 };

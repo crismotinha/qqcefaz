@@ -2,7 +2,7 @@
 {{!-- TODO: Como colocar o background roxo em Login e Cadastro sem afetar as outras paginas --}}
 <div class="valign-wrapper row login-box qqcefaz-login">
     <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
-        <form id="form-cadastro" method="post" action="#" enctype="multipart/form-data">
+        <form id="form-cadastro-usuario" method="POST" action="#" enctype="multipart/form-data">
             <div class="card-content">
                 <span class="card-title">Prazer te conhecer! Realize seu cadastro:</span>
                 {{!-- <span class="card-title">{{mensagem}}</span> --}}
@@ -98,4 +98,12 @@
             $("#cadastro-mensagem-senha").html("");
         }
     });
+
+    $("#form-cadastro-usuario").on('submit', (e) => {
+        $.ajax({
+            type: "POST",
+            url: "/usuario/cadastro",
+            data: $("#form-cadastro-usuario").serialize();
+        });
+    })
 </script>
