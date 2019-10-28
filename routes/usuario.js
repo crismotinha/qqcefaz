@@ -56,8 +56,9 @@ router.post("/usuarioexiste/", (req, res) => {
   UsuarioController.procuraUsuarioExiste(req, res);
 });
 
-router.post('informacoesnavbar', (req, res) => {
+//TODO: Não entra na rota pelo jquery
+router.post('/informacoesnavbar', (req, res) => {
   UsuarioController.informacoesNavbar(req, res);
-})
+});
 
 module.exports = router;

@@ -7,37 +7,41 @@ const Usuario = UsuarioModel.Usuario;
 
 module.exports = {
   login: (req, res) => {
-    Usuario.findOne({ email: req.body.email }).exec((err, usuario) => {
+    Usuario.findOne({
+      email: req.body.email
+    }).select("email senha -_id") //retorna apenas o email e a senha sem o id
+    .exec((err, usuario) => {
       if (err || !usuario) {
         res.render("login", {
           title: "login",
           email: req.body.email,
           mensagem: "Não foi possível fazer login."
         });
-      }
-
-      const usuarioValido = encrypter.validarSenha(
-        req.body.senha,
-        usuario.senha
-      );
-
-      //TODO: encriptar senha no front
-      if (!usuarioValido) {
-        console.log(req.body.senha);
-
-        console.log("não validado");
-        //TODO: Essa porra não manda pro caralho do root
-        res.render("login", {
-          title: "login",
-          email: req.body.email,
-          mensagem: "Não foi possível fazer login."
-        });
       } else {
-        console.log("validado");
-        const token = jwt.gerarToken(req.body.email);
-        res.cookie("token", token);
+        console.log(usuario);
+        const usuarioValido = encrypter.validarSenha(
+          req.body.senha,
+          usuario.senha
+        );
 
-        res.redirect(`${usuario.usuario}`);
+        //TODO: encriptar senha no front
+        if (!usuarioValido) {
+          console.log(req.body.senha);
+
+          console.log("não validado");
+          //TODO: Essa porra não manda pro caralho do root
+          res.render("login", {
+            title: "login",
+            email: req.body.email,
+            mensagem: "Não foi possível fazer login."
+          });
+        } else {
+          console.log("validado");
+          const token = jwt.gerarToken(req.body.email);
+          res.cookie("token", token);
+
+          res.redirect('/index');
+        }
       }
     });
   },
@@ -65,7 +69,7 @@ module.exports = {
     console.log(token);
     res.cookie("token", token);
 
-    res.redirect(`/usuario/${novoUsuario.usuario}`);
+    res.redirect('/index');                                                                                                                                                                                      ('../');
   },
   procuraUsuario: (req, res) => {
 
