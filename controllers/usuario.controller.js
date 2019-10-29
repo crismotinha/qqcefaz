@@ -19,7 +19,6 @@ module.exports = {
             mensagem: "Não foi possível fazer login."
           });
         } else {
-          console.log(usuario);
           const usuarioValido = encrypter.validarSenha(
             req.body.senha,
             usuario.senha
@@ -27,9 +26,6 @@ module.exports = {
 
           //TODO: encriptar senha no front
           if (!usuarioValido) {
-            console.log(req.body.senha);
-
-            console.log("não validado");
             //TODO: Essa porra não manda pro caralho do root
             res.render("login", {
               title: "login",
@@ -37,7 +33,6 @@ module.exports = {
               mensagem: "Não foi possível fazer login."
             });
           } else {
-            console.log("validado");
             const token = jwt.gerarToken(req.body.email);
             res.cookie("token", token);
 
@@ -62,23 +57,15 @@ module.exports = {
 
     let aux = UsuarioModel.cadastrarUsuario(novoUsuario);
 
-    console.log(`url da foto: ${file.location}`);
-    console.log(`objeto do usuario: ${novoUsuario}`);
-
     const token = jwt.gerarToken(req.body.email);
 
-    console.log(token);
     res.cookie("token", token);
 
     res.redirect("/index");
     ("../");
   },
   procuraUsuario: (req, res) => {
-    console.log("entrou no procura");
-
     // const tokenEmail = jwt.verificarToken(req.cookies.token);
-
-    // console.log(req.cookies);
 
     // Usuario.findOne({ usuario: req.params.usuario }).exec((err, usuario) => {
     //   if (err) {
@@ -126,8 +113,6 @@ module.exports = {
   },
   deletarUsuario: (req, res) => {
     Usuario.deleteOne({ usuario: req.params.usuario }, err => {
-      console.log("entrou na função de exlusao");
-
       if (err) {
         res.redirect(`/${req.params.usuario}`, {
           mensagem: "Não foi possível excluir o usuário.",
@@ -139,8 +124,6 @@ module.exports = {
     });
   },
   procuraEmail: (req, res) => {
-    console.log(req.body);
-
     Usuario.find({ email: req.body.email })
       .select("email -_id")
       .exec((err, email) => {
@@ -152,8 +135,6 @@ module.exports = {
       });
   },
   procuraUsuarioExiste: (req, res) => {
-    console.log(req.body);
-
     Usuario.find({ usuario: req.body.usuario })
       .select("email -_id")
       .exec((err, usuario) => {
@@ -172,7 +153,6 @@ module.exports = {
         if (err || !usuario) {
           res.json({ foto: null, email: null, nome: null });
         } else {
-          console.log(usuario);
           res.json({
             foto: usuario.foto,
             nome: usuario.nome,

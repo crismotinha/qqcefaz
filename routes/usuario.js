@@ -26,7 +26,6 @@ router.get("/cadastro", (req, res) => {
 
 /* POST cadastro do usuário */
 router.post("/cadastro", upload.single("foto"), (req, res) => {
-  console.log(req.body);
   UsuarioController.createUsuario(req, res, req.file);
 });
 
@@ -42,18 +41,14 @@ router.get("/:usuario/editar", (req, res) => {
 
 /* POST excluir usuário */
 router.get("/:usuario/excluir", (req, res) => {
-  console.log("Entrou na rota de exclusao");
-
   UsuarioController.deletarUsuario(req, res);
 });
 
 router.post("/emailexiste/", (req, res) => {
-  console.log("entrou no email");
   UsuarioController.procuraEmail(req, res);
 });
 
 router.post("/usuarioexiste/", (req, res) => {
-  console.log("entrou no email");
   UsuarioController.procuraUsuarioExiste(req, res);
 });
 

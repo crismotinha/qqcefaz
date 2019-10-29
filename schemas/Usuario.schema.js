@@ -27,7 +27,6 @@ module.exports = {
   },
   procuraUsuario: usuario => {
     return Usuario.find({ usuario: usuario }).exec(result => {
-      console.log(result);
       return result;
     });
   },

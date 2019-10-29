@@ -17,7 +17,6 @@ let imageUpload = multer({
     bucket: "vaidarbom",
     acl: "public-read",
     key: (req, file, cb) => {
-      //console.log(req);
       cb(
         null,
         Date.now().toString() +

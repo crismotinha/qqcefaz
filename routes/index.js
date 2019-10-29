@@ -7,7 +7,7 @@ router.get('/index', (req, res) => {
 })
 
 /* GET home page. */
-router.get("/", function(req, res, next) {
+router.get("/", (req, res, next) => {
   IndexController.usuarioLogado(req, res);
 });
 
