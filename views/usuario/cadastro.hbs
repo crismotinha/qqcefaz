@@ -56,7 +56,6 @@
     </div>
 </body>
 <script>
-    
     $("#cadastro-email").focusout((e) => {
         console.log(e);
         $.ajax({
@@ -74,21 +73,31 @@
             }
         });
     });
-
-    $("#cadastro-usuario").focusout((e) => {
-        console.log($("#cadastro-usuario").val());
+    $("#cadastro-email").focusout((e) => {
+        console.log(e);
         $.ajax({
             type: "POST",
-            url: "/usuario/usuarioexiste",
+            url: "/usuario/emailexiste",
             data: {
-                usuario: $("#cadastro-usuario").val()
+                email: $("#cadastro-email").val()
             }
         }).done(d => {
-            if (d.existe) {
-                $("#cadastro-mensagem-usuario").html("Usuário já cadastrado.");
-            } else {
-                $("#cadastro-mensagem-usuario").html("");
-            }
+            $("#cadastro-usuario").focusout((e) => {
+                console.log($("#cadastro-usuario").val());
+                $.ajax({
+                    type: "POST",
+                    url: "/usuario/usuarioexiste",
+                    data: {
+                        usuario: $("#cadastro-usuario").val()
+                    }
+                }).done(d => {
+                    if (d.existe) {
+                        $("#cadastro-mensagem-usuario").html("Usuário já cadastrado.");
+                    } else {
+                        $("#cadastro-mensagem-usuario").html("");
+                    }
+                });
+            });
         });
     });
 
@@ -106,7 +115,7 @@
         $.ajax({
             type: "POST",
             url: "/usuario/cadastro",
-            data: $("#form-cadastro-usuario").serialize();
+            data: $("#form-cadastro-usuario").serialize()
         });
-    })
+    });
 </script>

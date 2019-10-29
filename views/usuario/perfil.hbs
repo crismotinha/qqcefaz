@@ -27,20 +27,21 @@
     </li>
 </ul>
 <script>
-    $("#mobile-demo").load(() => {
-    let cookie = $(cookie);
-    $.ajax({
-      type: 'POST',
-      url: '/usuario/informacoesnavbar',
-      data: {
-        token: cookie.token
-      }
-    }).done((d) => {
-      console.log(d);
-      Swal.fire(d);
-      $('#nav-bar-foto').attr("src", d.foto);
-      $('nav-bar-nome').html(d.nome);
-      $('nav-bar-email').html(d.email);
+    $(document).ready(() => {
+        let token = $.cookie("token");
+        console.log(token);
+        $.ajax({
+            type: 'POST',
+            url: '/usuario/informacoesnavbar',
+            data: {
+                token: token
+            }
+        }).done((d) => {
+            console.log(d);
+            $('#nav-bar-foto').attr("src", d.foto);
+            $('#nav-bar-nome').html(d.nome);
+            $('#nav-bar-email').html(d.email);
+            $("#nav-bar-usuario").attr("href", `/usuario/${d.usuario}`);
+        });
     });
-  });
 </script>
