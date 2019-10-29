@@ -1,5 +1,7 @@
+{{> navbar}}
+
 <div>
-    <img src="{{foto}}" alt="foto usuário" style="max-width: 30%; border-radius: 50%">
+    <img src="{{foto}}" alt="foto usuário" style="max-width: 30%; border-radius: 50%" class="align-center">
 </div>
 <span>{{mensagem}}</span>
 <a href="/usuario/{{usuario}}/editar" class="waves-effect waves-light btn">Editar Usuário</a>
@@ -24,3 +26,21 @@
         </span>
     </li>
 </ul>
+<script>
+    $("#mobile-demo").load(() => {
+    let cookie = $(cookie);
+    $.ajax({
+      type: 'POST',
+      url: '/usuario/informacoesnavbar',
+      data: {
+        token: cookie.token
+      }
+    }).done((d) => {
+      console.log(d);
+      Swal.fire(d);
+      $('#nav-bar-foto').attr("src", d.foto);
+      $('nav-bar-nome').html(d.nome);
+      $('nav-bar-email').html(d.email);
+    });
+  });
+</script>

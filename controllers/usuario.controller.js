@@ -7,47 +7,51 @@ const Usuario = UsuarioModel.Usuario;
 
 module.exports = {
   login: (req, res) => {
-    Usuario.findOne({ email: req.body.email }).exec((err, usuario) => {
-      if (err || !usuario) {
-        res.render("login", {
-          title: "login",
-          email: req.body.email,
-          mensagem: "Não foi possível fazer login."
-        });
-      }
+    Usuario.findOne({
+      email: req.body.email
+    })
+      .select("email senha -_id") //retorna apenas o email e a senha sem o id
+      .exec((err, usuario) => {
+        if (err || !usuario) {
+          res.render("login", {
+            title: "login",
+            email: req.body.email,
+            mensagem: "Não foi possível fazer login."
+          });
+        } else {
+          console.log(usuario);
+          const usuarioValido = encrypter.validarSenha(
+            req.body.senha,
+            usuario.senha
+          );
 
-      const usuarioValido = encrypter.validarSenha(
-        req.body.senha,
-        usuario.senha
-      );
+          //TODO: encriptar senha no front
+          if (!usuarioValido) {
+            console.log(req.body.senha);
 
-      //TODO: encriptar senha no front
-      if (!usuarioValido) {
-        console.log(req.body.senha);
+            console.log("não validado");
+            //TODO: Essa porra não manda pro caralho do root
+            res.render("login", {
+              title: "login",
+              email: req.body.email,
+              mensagem: "Não foi possível fazer login."
+            });
+          } else {
+            console.log("validado");
+            const token = jwt.gerarToken(req.body.email);
+            res.cookie("token", token);
 
-        console.log("não validado");
-        //TODO: Essa porra não manda pro caralho do root
-        res.render("login", {
-          title: "login",
-          email: req.body.email,
-          mensagem: "Não foi possível fazer login."
-        });
-      } else {
-        console.log("validado");
-        const token = jwt.gerarToken(req.body.email);
-        console.log(token);
-        res.cookie("token", token);
-        res.cookie("usuario", usuario.usuario);
-
-        res.redirect(`/usuario/${usuario.usuario}`);
-      }
-    });
+            res.redirect("/index");
+          }
+        }
+      });
   },
   createUsuario: (req, res, file) => {
     //TODO: checar e-mail
     //TODO: checar senha
     //TODO: checar usuario
     //TODO: Restringir criação de mais de um usuario com o mesmo nome
+
     let novoUsuario = new Usuario();
 
     novoUsuario.nome = req.body.nome;
@@ -58,32 +62,20 @@ module.exports = {
 
     let aux = UsuarioModel.cadastrarUsuario(novoUsuario);
 
-    console.log("url da foto: ${file.location}");
-    console.log("objeto do usuario: ${novoUsuario}");
+    console.log(`url da foto: ${file.location}`);
+    console.log(`objeto do usuario: ${novoUsuario}`);
 
-    res.redirect(`/usuario/${usuario.usuario}`);
+    const token = jwt.gerarToken(req.body.email);
 
-    // Usuario.findOne({ email: usuario.email })
-    //   .select("email -_id")
-    //   .exec((err, usuarioEmail) => {
-    //     if (err) {
-    //       console.log("entou no if do erro");
+    console.log(token);
+    res.cookie("token", token);
 
-    //       res.json(err);
-    //     } else {
-    //       console.log("entrou no else da pesquisa");
-
-    //       if (usuarioEmail.email == usuario.email) {
-    //         res.redirect("/cadastro", {
-    //           title: cadastro,
-    //           campoNome: usuario.nome,
-    //           mensagemUsuario: "Este usuário já está cadastrado"
-    //         });
-    //       }
-    //     }
-    //   });
+    res.redirect("/index");
+    ("../");
   },
   procuraUsuario: (req, res) => {
+    console.log("entrou no procura");
+
     // const tokenEmail = jwt.verificarToken(req.cookies.token);
 
     // console.log(req.cookies);
@@ -160,7 +152,7 @@ module.exports = {
         }
       });
   },
-  procuraUsuario: (req, res) => {
+  procuraUsuarioExiste: (req, res) => {
     console.log(req.body);
 
     Usuario.find({ usuario: req.body.usuario })
@@ -170,6 +162,23 @@ module.exports = {
           res.json({ existe: false });
         } else {
           res.json({ existe: true });
+        }
+      });
+  },
+  informacoesNavbar: (req, res) => {
+    let tokenTraduzido = jwt.verificarToken(req.body.token);
+    Usuario.findOne({ email: tokenTraduzido.email })
+      .select("foto nome email -_id")
+      .exec((err, usuario) => {
+        if (err || !usuario) {
+          res.json({ foto: null, email: null, nome: null });
+        } else {
+          console.log(usuario);
+          res.json({
+            foto: usuario.foto,
+            nome: usuario.nome,
+            email: usuario.email
+          });
         }
       });
   }

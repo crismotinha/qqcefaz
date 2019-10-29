@@ -1,5 +1,5 @@
 const AWS = require("aws-sdk");
-require("dotenv").config();
+const dotenv = require("dotenv").config();
 const multer = require("multer");
 const multers3 = require("multer-s3");
 

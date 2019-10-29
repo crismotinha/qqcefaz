@@ -94,9 +94,21 @@ nav {
   color: var(--secondary-color);
 }
 
-/* LOGIN */
+/* LOGIN E CADASTRO */
 .qqcefaz-login {
   margin-top: 100px;
 }
 
-/* CADASTRO */
+.btn-action-signup-signin {
+  background-color: #ffffff;
+  color: var(--primary-color) !important;
+}
+
+.signup-signin-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.signup-signin-action input {
+  color: white;
+}

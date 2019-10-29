@@ -1,28 +1,30 @@
 {{!-- TODO: não sei como colocar um espaço aqui, mas seria legal uma margem pra não encostar a box no topo --}}
-<div class="valign-wrapper row login-box qqcefaz-login">
-    <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
-        <form action="/usuario/login" method="POST" id="form-login">
-            <div class="card-content">
-                <span class="card-title">Olá de novo! Faça seu login:</span>
-                <span class="card-title">{{mensagem}}</span>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <label for="email">E-mail:</label>
-                        <input type="email" name="email" id="email" class="validate" placeholder="e-mail lindo"
-                            value="{{email}}">
-                    </div>
-                    <div class="input-field col s12">
-                        <label for="password">Senha:</label>
-                        <input type="password" class="validate" name="senha" id="password"
-                            placeholder="senha super secreta">
+
+<body style="background-color: var(--primary-color);">
+    <div class="valign-wrapper row login-box qqcefaz-login">
+        <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
+            <form action="/usuario/login" method="POST" id="form-login">
+                <div class="card-content">
+                    <span class="card-title">Olá de novo! Faça seu login:</span>
+                    <span class="card-title">{{mensagem}}</span>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <label for="email">E-mail:</label>
+                            <input type="email" name="email" id="email" class="validate" placeholder="e-mail lindo"
+                                value="{{email}}">
+                        </div>
+                        <div class="input-field col s12">
+                            <label for="password">Senha:</label>
+                            <input type="password" class="validate" name="senha" id="password"
+                                placeholder="senha super secreta">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-action right-align">
-                <input type="submit" class="btn waves-effect waves-light center-align" value="Login">
-            </div>
-        </form>
+                <div class="card-action right-align signup-signin-action">
+                    <a class="left btn-action-signup-signin" href="/usuario/cadastro">Cadastre-se</a>
+                    <input type="submit" class="btn waves-effect waves-light center-align btn-login" value="Login">
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-<button onclick="test()">Clique aqui!</button>
+</body>
