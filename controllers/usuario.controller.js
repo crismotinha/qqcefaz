@@ -112,7 +112,6 @@ module.exports = {
     });
   },
   editarUsuario: (req, res) => {
-    console.log(`Token: ${req.cookies.token}`);
     Usuario.findOne({ usuario: req.params.usuario }).exec((err, usuario) => {
       if (err) res.status(404).send("Usuário não existe");
       res.render("usuario/editar", {
