@@ -56,7 +56,6 @@
     </div>
 </body>
 <script>
-
     $("#cadastro-email").focusout((e) => {
         console.log(e);
         $.ajax({
@@ -99,22 +98,24 @@
                     }
                 });
             });
+        });
+    });
 
-            $("#cadastro-senha").focusout(() => {
-                if ($("#cadastro-senha").val().toString().length < 6) {
-                    console.log("Entrou no if");
-                    $("#cadastro-mensagem-senha").html("A senha precisa ter 6 caracteres");
-                } else {
-                    console.log("Entrou no else");
-                    $("#cadastro-mensagem-senha").html("");
-                }
-            });
+    $("#cadastro-senha").focusout(() => {
+        if ($("#cadastro-senha").val().toString().length < 6) {
+            console.log("Entrou no if");
+            $("#cadastro-mensagem-senha").html("A senha precisa ter 6 caracteres");
+        } else {
+            console.log("Entrou no else");
+            $("#cadastro-mensagem-senha").html("");
+        }
+    });
 
-            $("#form-cadastro-usuario").on('submit', (e) => {
-                $.ajax({
-                    type: "POST",
-                    url: "/usuario/cadastro",
-                    data: $("#form-cadastro-usuario").serialize();
-                });
-            })
+    $("#form-cadastro-usuario").on('submit', (e) => {
+        $.ajax({
+            type: "POST",
+            url: "/usuario/cadastro",
+            data: $("#form-cadastro-usuario").serialize()
+        });
+    });
 </script>

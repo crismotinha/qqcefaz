@@ -168,7 +168,7 @@ module.exports = {
   informacoesNavbar: (req, res) => {
     let tokenTraduzido = jwt.verificarToken(req.body.token);
     Usuario.findOne({ email: tokenTraduzido.email })
-      .select("foto nome email -_id")
+      .select("foto nome email usuario -_id")
       .exec((err, usuario) => {
         if (err || !usuario) {
           res.json({ foto: null, email: null, nome: null });
@@ -177,7 +177,8 @@ module.exports = {
           res.json({
             foto: usuario.foto,
             nome: usuario.nome,
-            email: usuario.email
+            email: usuario.email,
+            usuario: usuario.usuario
           });
         }
       });
