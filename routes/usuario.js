@@ -19,6 +19,10 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
+router.get("/logout", (req, res) => {
+  UsuarioController.logout(req, res);
+});
+
 /* GET cadastro do usuário */
 router.get("/cadastro", (req, res) => {
   res.render("usuario/cadastro", { title: "qqcefaz? | Cadastro" });
@@ -53,7 +57,7 @@ router.post("/usuarioexiste/", (req, res) => {
 });
 
 //TODO: Não entra na rota pelo jquery
-router.post('/informacoesnavbar', (req, res) => {
+router.post("/informacoesnavbar", (req, res) => {
   UsuarioController.informacoesNavbar(req, res);
 });
 
