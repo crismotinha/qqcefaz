@@ -25,6 +25,12 @@
                                 required>
                         </div>
                         <div class="input-field col s12">
+                            <span id="cadastro-mensagem-usuario" class="red"></span>
+                            <label for="usuario">Usuário:</label>
+                            <input type="text" class="validate" name="usuario" id="cadastro-usuario"
+                                placeholder="único no mundo" required>
+                        </div>
+                        <div class="input-field col s12">
                             <span id="cadastro-mensagem-email" class="red"></span>
                             <label for="email-usuario">Email:</label>
                             <input type="email" class="validate" name="email" id="cadastro-email"
@@ -37,10 +43,9 @@
                                 id="cadastro-senha" required>
                         </div>
                         <div class="input-field col s12">
-                            <span id="cadastro-mensagem-usuario" class="red"></span>
-                            <label for="usuario">Usuário:</label>
-                            <input type="text" class="validate" name="usuario" id="cadastro-usuario"
-                                placeholder="único no mundo" required>
+                            <label for="confirmacao-senha-usuario"> Confirmação de Senha:</label>
+                            <input type="password" class="validate" placeholder="confirme"
+                                id="confirmacao-senha-usuario" required>
                         </div>
                     </div>
                 </div>
@@ -57,43 +62,41 @@
 </body>
 <script>
     $("#cadastro-email").focusout((e) => {
+
+        let emailuff = /^[a-zA-z\.-_]+(@id\.uff\.br)$/
+        if (emailuff.test($("#cadastro-email").val().toString())) {
+
+            $.ajax({
+                type: "POST",
+                url: "/usuario/emailexiste",
+                data: {
+                    email: $("#cadastro-email").val()
+                }
+            }).done(d => {
+                if (d.existe) {
+                    $("#cadastro-mensagem-email").html("E-mail já cadastrado.");
+                } else {
+                    $("#cadastro-mensagem-email").html("");
+                }
+            });
+        } else {
+            $("#cadastro-mensagem-email").html("Parece que seu e-mail não é da UFF");
+        }
+    });
+
+    $("#cadastro-usuario").focusout((e) => {
         $.ajax({
             type: "POST",
-            url: "/usuario/emailexiste",
+            url: "/usuario/usuarioexiste",
             data: {
-                email: $("#cadastro-email").val()
+                usuario: $("#cadastro-usuario").val()
             }
         }).done(d => {
             if (d.existe) {
-                $("#cadastro-mensagem-email").html("E-mail já cadastrado.");
+                $("#cadastro-mensagem-usuario").html("Usuário já cadastrado.");
             } else {
-                $("#cadastro-mensagem-email").html("");
+                $("#cadastro-mensagem-usuario").html("");
             }
-        });
-    });
-    $("#cadastro-email").focusout((e) => {
-        $.ajax({
-            type: "POST",
-            url: "/usuario/emailexiste",
-            data: {
-                email: $("#cadastro-email").val()
-            }
-        }).done(d => {
-            $("#cadastro-usuario").focusout((e) => {
-                $.ajax({
-                    type: "POST",
-                    url: "/usuario/usuarioexiste",
-                    data: {
-                        usuario: $("#cadastro-usuario").val()
-                    }
-                }).done(d => {
-                    if (d.existe) {
-                        $("#cadastro-mensagem-usuario").html("Usuário já cadastrado.");
-                    } else {
-                        $("#cadastro-mensagem-usuario").html("");
-                    }
-                });
-            });
         });
     });
 
@@ -105,11 +108,29 @@
         }
     });
 
-    $("#form-cadastro-usuario").on('submit', (e) => {
-        $.ajax({
-            type: "POST",
-            url: "/usuario/cadastro",
-            data: $("#form-cadastro-usuario").serialize()
-        });
+    $("#confirmacao-senha-usuario").focusout(() => {
+        confirmaCaoSenha();
     });
+
+    $("#form-cadastro-usuario").on('submit', (e) => {
+        if (confirmaCaoSenha) {
+            $.ajax({
+                type: "POST",
+                url: "/usuario/cadastro",
+                data: $("#form-cadastro-usuario").serialize()
+            });
+        }
+
+    });
+
+    let confirmaCaoSenha = () => {
+        if ($("#cadastro-senha").val().toString() != $("#confirmacao-senha-usuario").val().toString()) {
+            $("#cadastro-mensagem-senha").html("As senhas precisam ser iguais");
+            return false;
+        } else {
+            $("#cadastro-mensagem-senha").html("");
+            return true;
+        }
+    };
+
 </script>
