@@ -1,6 +1,5 @@
 const UsuarioModel = require("../schemas/Usuario.schema");
 const encrypter = require("../services/encrypter.service");
-const s3 = require("../services/s3.service");
 const jwt = require("../services/jwt.service");
 
 const Usuario = UsuarioModel.Usuario;
@@ -62,27 +61,8 @@ module.exports = {
     res.cookie("token", token);
 
     res.redirect("/index");
-    ("../");
   },
   procuraUsuario: (req, res) => {
-    // const tokenEmail = jwt.verificarToken(req.cookies.token);
-
-    // Usuario.findOne({ usuario: req.params.usuario }).exec((err, usuario) => {
-    //   if (err) {
-    //     res.status(404).send("Usuário não existe");
-    //   } else if (usuario.email == tokenEmail.email) {
-    //     res.render("usuario/perfil", {
-    //       title: "Perfil",
-    //       foto: usuario.foto,
-    //       nome: usuario.nome,
-    //       usuario: usuario.usuario,
-    //       email: usuario.email
-    //     });
-    //   } else {
-    //     res.redirect(`${req.cookies.usuario}`);
-    //   }
-    // });
-
     Usuario.findOne({ usuario: req.params.usuario }).exec((err, usuario) => {
       if (err) {
         res.status(404).send("Usuário não existe");
@@ -99,7 +79,7 @@ module.exports = {
       }
     });
   },
-  editarUsuario: (req, res) => {
+  paginaEdicaoUsuario: (req, res) => {
     Usuario.findOne({ usuario: req.params.usuario }).exec((err, usuario) => {
       if (err) res.status(404).send("Usuário não existe");
       res.render("usuario/editar", {
@@ -110,6 +90,41 @@ module.exports = {
         email: usuario.email
       });
     });
+  },
+  editarUsuario: (req, res, file) => {
+    Usuario.findOne({usuario: req.body.usuario})
+    .exec((err, usuario) => {
+      if (encrypter.validarSenha(req.body.senhaAtual, usuario.senha)) {
+        Usuario.updateOne({_id: usuario._id}, 
+          {foto: (file != null ? file.location : usuario.foto),
+            senha: encrypter.encriptarSenha(req.body.senha),
+            nome: req.body.nome},
+            (err, usuarioAtualizado) => {
+              if (usuarioAtualizado) {
+                res.redirect(`/usuario/${usuario.usuario}`);
+              } else {
+                res.render("usuario/editar", {
+                  title: "Edição de Perfil",
+                  foto: usuario.foto,
+                  nome: usuario.nome,
+                  usuario: usuario.usuario,
+                  email: usuario.email,
+                  mensagemGeral: "Não foi possível atualizar a conta."
+                });
+              }
+            })
+      } else {
+        res.render("usuario/editar", {
+          title: "Edição de Perfil",
+          foto: usuario.foto,
+          nome: usuario.nome,
+          usuario: usuario.usuario,
+          email: usuario.email,
+          mensagemSenhaAtual: " A senha atual está incorreta.",
+          mensagemGeral: "Não foi possível atualizar a conta"
+        });
+      }
+    })
   },
   deletarUsuario: (req, res) => {
     Usuario.deleteOne({ usuario: req.params.usuario }, err => {

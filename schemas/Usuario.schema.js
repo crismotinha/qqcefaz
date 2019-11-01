@@ -11,13 +11,14 @@ const Usuario = mongoose.model(
     token: String,
     usuario: String,
     excluido: Boolean,
-    foto: String
+    foto: String,
+    administrador: Boolean
   })
 );
 
 module.exports = {
   Usuario: Usuario,
-  cadastrarUsuario: (novoUsuario, upsert = false) => {
+  cadastrarUsuario: (novoUsuario) => {
     let aux;
     novoUsuario.save().then((err, resp) => {
       if (err) return (aux = err);
@@ -30,5 +31,17 @@ module.exports = {
       return result;
     });
   },
-  desativaUsuario: null
+  desativaUsuario: null,
+  usuarioAdministrador: (usuario) => {
+    return Usuario.findOne({usuario: usuario})
+    .exec((err, usuario) => {
+      if (err || !usuario) {
+        return false;
+      } else if (usuario.administrador){
+        return true;
+      } else {
+        return false;
+      }
+    })
+  }
 };

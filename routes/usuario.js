@@ -38,9 +38,20 @@ router.get("/:usuario", (req, res) => {
   UsuarioController.procuraUsuario(req, res);
 });
 
+router.post('/:usuario/editar', upload.single("foto"), (req, res) => {
+  try {
+    let file = req.file;
+    UsuarioController.editarUsuario(req, res, file)
+  } catch (e) {
+    //caso o usuario não mande uma foto nova, precisa do try catch porque eu ainda não aprendi a tratar undefined  
+    UsuarioController.editarUsuario(req, res, null);
+  }
+  
+})
+
 /* GET edição do usuário */
 router.get("/:usuario/editar", (req, res) => {
-  UsuarioController.editarUsuario(req, res);
+  UsuarioController.paginaEdicaoUsuario(req, res);
 });
 
 /* POST excluir usuário */
