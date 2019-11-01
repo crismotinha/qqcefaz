@@ -9,7 +9,6 @@ router.get("/", function(req, res, next) {
 });
 
 /* POST login do usuário */
-
 router.post("/login", (req, res) => {
   UsuarioController.login(req, res);
 });

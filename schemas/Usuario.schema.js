@@ -9,7 +9,7 @@ const Usuario = mongoose.model(
     email: { type: String, unique: true },
     senha: String,
     token: String,
-    usuario: String,
+    usuario: { type: String, unique: true },
     excluido: Boolean,
     foto: String
   })

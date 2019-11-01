@@ -1,3 +1,18 @@
-<h1>{{message}}</h1>
-<h2>{{error.status}}</h2>
-<pre>{{error.stack}}</pre>
+<body style="background-color: var(--primary-color);">
+    <div class="error-msg container">
+        <div class="error-content">
+            <div class="error-icon">
+                <i class="material-icons large">highlight_off</i>
+            </div>
+            <div class="error-text">
+                <h1>{{error.status}}</h1>
+                <h2>{{message}}</h2>
+                <p>Ops.. um erro ocorreu. Sugerimos que você volte para a homepage.</p>
+                <a href="/" class="btn">Me leve de volta</a>
+            </div>
+        </div>
+        <div class="error-stack" id="error-stack">
+        <pre>{{error.stack}}</pre>
+        </div>
+    </div>
+</body>
