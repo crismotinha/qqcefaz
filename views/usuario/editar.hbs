@@ -2,7 +2,9 @@
 
 <h4>Edição de Usuário</h4>
 
-<form id="form-cadastro" method="post" action="/usuario/editar" enctype="multipart/form-data">
+<span class="red">{{mensagemGeral}}</span>
+
+<form id="form-cadastro" method="POST" action="/usuario/{{usuario}}/editar" enctype="multipart/form-data">
     <div>
         <img src="{{foto}}" style="max-width: 30%; border-radius: 50%">
         <label for="foto">Rostinho bonito de deus: </label>
@@ -14,11 +16,16 @@
     </div>
     <div>
         <label for="email-usuario">E-mail:</label>
-        <input type="email" name="email" value="{{email}}l">
+        <input type="email" name="email" value="{{email}}" readonly>
+    </div>
+    <div>
+        <span class="red">{{mensagemSenhaAtual}}</span>
+        <label for="senha-autal-usuario" id="perfil-senha-atual">Senha Atual:</label>
+        <input type="password" name="senhaAtual" id="senha-atual-usuario" placeholder="a de sempre">
     </div>
     <div>
         <span id="cadastro-mensagem-senha" class="red"></span>
-        <label for="senha-usuario" id="perfil-confirmacao-senha">Senha:</label>
+        <label for="senha-usuario" id="perfil-senha">Senha:</label>
         <input type="password" name="senha" placeholder="secretissima">
     </div>
     <div>

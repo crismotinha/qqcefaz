@@ -7,7 +7,8 @@ const url = process.env.DB_URL;
 
 mongoose.connect(`mongodb+srv://${user}:${password}@${url}`, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  dbName: 'qqcefaz'
 });
 
 module.exports = {
