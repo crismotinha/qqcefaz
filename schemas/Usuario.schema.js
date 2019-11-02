@@ -11,7 +11,8 @@ const Usuario = mongoose.model(
     token: String,
     usuario: { type: String, unique: true },
     excluido: Boolean,
-    foto: String
+    foto: String,
+    admin: Boolean
   })
 );
 
