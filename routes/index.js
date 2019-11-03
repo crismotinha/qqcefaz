@@ -1,8 +1,9 @@
 var express = require("express");
 var router = express.Router();
+var auth = require("../services/auth.service");
 
 /* GET home page. */
-router.get("/", function(req, res, next) {
+router.get("/", auth.isAuthorized, function(req, res, next) {
   res.render("index", { title: "qqcefaz?" });
 });
 
