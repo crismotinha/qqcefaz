@@ -20,6 +20,46 @@ body {
   background-color: #fafafa;
 }
 
+.error-msg {
+  color: #fafafa;
+  padding-top: 70px;
+}
+
+.error-content {
+  display: flex;
+  align-items: center;
+}
+
+.error-text {
+  padding-left: 89px;
+}
+.error-text h1 {
+  font-weight: 900;
+}
+
+.error-text h2 {
+  font-size: 30px;
+  text-transform: uppercase;
+}
+
+.error-stack {
+  margin-top: 30px;
+  font-size: 9px;
+  background: #474747;
+  border-radius: 5px;
+  padding: 3px 5px;
+}
+
+@media screen and (max-width: 600px) {
+  #error-stack {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
+  }
+}
 
 /* SIDEBAR */
 nav {

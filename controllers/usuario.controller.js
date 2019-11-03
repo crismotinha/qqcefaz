@@ -15,7 +15,7 @@ module.exports = {
           res.render("login", {
             title: "login",
             email: req.body.email,
-            mensagem: "Não foi possível fazer login."
+            mensagem: "Um erro ocorreu. Por favor, tente novamente."
           });
         } else {
           const usuarioValido = encrypter.validarSenha(
@@ -29,7 +29,7 @@ module.exports = {
             res.render("login", {
               title: "login",
               email: req.body.email,
-              mensagem: "Não foi possível fazer login."
+              mensagem: "Um erro ocorreu. Por favor, tente novamente."
             });
           } else {
             const token = jwt.gerarToken(req.body.email);
