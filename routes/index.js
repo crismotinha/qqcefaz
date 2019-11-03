@@ -1,10 +1,15 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 var auth = require("../services/auth.service");
+const IndexController = require('../controllers/index.controller');
+
+router.get('/index', (req, res) => {
+  res.render('index');
+})
 
 /* GET home page. */
-router.get("/", auth.isAuthorized, function(req, res, next) {
-  res.render("index", { title: "qqcefaz?" });
+router.get("/", auth.isAuthorized, (req, res, next) => {
+  IndexController.usuarioLogado(req, res);
 });
 
 router.get("/login", (req, res) => {

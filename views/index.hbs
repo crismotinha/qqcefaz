@@ -26,3 +26,21 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(() => {
+    let token = $.cookie("token");
+    $.ajax({
+      type: 'POST',
+      url: '/usuario/informacoesnavbar',
+      data: {
+        token: token
+      }
+    }).done((d) => {
+      $('#nav-bar-foto').attr("src", d.foto);
+      $('#nav-bar-nome').html(d.nome);
+      $('#nav-bar-email').html(d.email);
+      $("#nav-bar-usuario").attr("href", `/usuario/${d.usuario}`);
+    });
+  });
+</script>

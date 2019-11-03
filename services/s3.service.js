@@ -1,5 +1,5 @@
 const AWS = require("aws-sdk");
-require("dotenv").config();
+const dotenv = require("dotenv").config();
 const multer = require("multer");
 const multers3 = require("multer-s3");
 
@@ -17,7 +17,6 @@ let imageUpload = multer({
     bucket: "vaidarbom",
     acl: "public-read",
     key: (req, file, cb) => {
-      //console.log(req);
       cb(
         null,
         Date.now().toString() +

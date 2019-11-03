@@ -1,9 +1,12 @@
+{{> navbar}}
+
 <div>
-    <img src="{{foto}}" alt="foto usuário" style="max-width: 30%; border-radius: 50%">
+    <img src="{{foto}}" alt="foto usuário" style="max-width: 30%; border-radius: 50%" class="align-center">
 </div>
 <span>{{mensagem}}</span>
 <a href="/usuario/{{usuario}}/editar" class="waves-effect waves-light btn">Editar Usuário</a>
-<a href="/usuario/{{usuario}}/excluir" class="waves-effect waves-light btn red">Excluir Usuário</a>
+<a class="waves-effect waves-light btn red" id="botao-excluir-usuario">Excluir
+    Usuário</a>
 <ul class="collection with-header">
     <li class="collection-header">
         Nome:
@@ -24,3 +27,39 @@
         </span>
     </li>
 </ul>
+<script>
+    $(document).ready(() => {
+        let token = $.cookie("token");
+        $.ajax({
+            type: 'POST',
+            url: '/usuario/informacoesnavbar',
+            data: {
+                token: token
+            }
+        }).done((d) => {
+
+            $('#nav-bar-foto').attr("src", d.foto);
+            $('#nav-bar-nome').html(d.nome);
+            $('#nav-bar-email').html(d.email);
+            $("#nav-bar-usuario").attr("href", `/usuario/${d.usuario}`);
+        });
+    });
+
+    $("#botao-excluir-usuario").click(e => {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Tem certeza??',
+            text: "Essa ação não é reversível",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, apague a conta!'
+        }).then((result) => {
+            if (result.value) {
+                window.location.href = "/usuario/{{usuario}}/excluir";
+            }
+        });
+    }
+    )
+</script>

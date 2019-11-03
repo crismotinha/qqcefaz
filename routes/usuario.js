@@ -3,31 +3,24 @@ const router = express.Router();
 const UsuarioController = require("../controllers/usuario.controller");
 const upload = require("../services/s3.service").multer;
 
-router.post("/emailexiste/", (req, res) => {
-  console.log("entrou no email");
-  UsuarioController.procuraEmail(req, res);
-});
-
-router.post("/usuarioexiste/", (req, res) => {
-  console.log("entrou no email");
-  UsuarioController.procuraUsuario(req, res);
-});
-
 /* GET users listing. */
 router.get("/", function(req, res, next) {
   res.render("usuarios");
 });
 
-// /* POST login do usuário */
+/* POST login do usuário */
+router.post("/login", (req, res) => {
+  UsuarioController.login(req, res);
+});
 
-// router.post("/login", (req, res) => {
-//   UsuarioController.login(req, res);
-// });
+/* GET para login caso caia em /usuario/login */
+router.get("/login", (req, res) => {
+  res.render("login");
+});
 
-// /* GET para login caso caia em /usuario/login */
-// router.get("/login", (req, res) => {
-//   res.render("login");
-// });
+router.get("/logout", (req, res) => {
+  UsuarioController.logout(req, res);
+});
 
 /* GET cadastro do usuário */
 router.get("/cadastro", (req, res) => {
@@ -44,16 +37,38 @@ router.get("/:usuario", (req, res) => {
   UsuarioController.procuraUsuario(req, res);
 });
 
+router.post('/:usuario/editar', upload.single("foto"), (req, res) => {
+  try {
+    let file = req.file;
+    UsuarioController.editarUsuario(req, res, file)
+  } catch (e) {
+    //caso o usuario não mande uma foto nova, precisa do try catch porque eu ainda não aprendi a tratar undefined  
+    UsuarioController.editarUsuario(req, res, null);
+  }
+  
+})
+
 /* GET edição do usuário */
 router.get("/:usuario/editar", (req, res) => {
-  UsuarioController.editarUsuario(req, res);
+  UsuarioController.paginaEdicaoUsuario(req, res);
 });
 
 /* POST excluir usuário */
 router.get("/:usuario/excluir", (req, res) => {
-  console.log("Entrou na rota de exclusao");
-
   UsuarioController.deletarUsuario(req, res);
+});
+
+router.post("/emailexiste/", (req, res) => {
+  UsuarioController.procuraEmail(req, res);
+});
+
+router.post("/usuarioexiste/", (req, res) => {
+  UsuarioController.procuraUsuarioExiste(req, res);
+});
+
+//TODO: Não entra na rota pelo jquery
+router.post("/informacoesnavbar", (req, res) => {
+  UsuarioController.informacoesNavbar(req, res);
 });
 
 module.exports = router;

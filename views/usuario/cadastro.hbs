@@ -1,79 +1,90 @@
 {{!-- TODO: não sei como colocar um espaço aqui, mas seria legal uma margem pra não encostar a box no topo --}}
-{{!-- TODO: Como colocar o background roxo em Login e Cadastro sem afetar as outras paginas --}}
-<div class="valign-wrapper row login-box qqcefaz-login">
-    <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
-        <form id="form-cadastro" method="post" action="#" enctype="multipart/form-data">
-            <div class="card-content">
-                <span class="card-title">Prazer te conhecer! Realize seu cadastro:</span>
-                {{!-- <span class="card-title">{{mensagem}}</span> --}}
-                <div class="row">
-                    <div class="input-field col s12">
-                        <div class="file-field input-field">
-                            <div class="btn">
-                                <span>Escolha uma foto</span>
-                                <input type="file" name="foto" required>
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
+
+<body style="background-color: var(--primary-color);">
+    <div class="valign-wrapper row login-box qqcefaz-login">
+        <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
+            <form id="form-cadastro-usuario" method="POST" action="#" enctype="multipart/form-data">
+                <div class="card-content">
+                    <span class="card-title">Prazer te conhecer! Realize seu cadastro:</span>
+                    {{!-- <span class="card-title">{{mensagem}}</span> --}}
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <div class="file-field input-field">
+                                <div class="btn">
+                                    <span>Escolha uma foto</span>
+                                    <input type="file" name="foto" required>
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="input-field col s12">
-                        <label for="nome-usuario">Nome:</label>
-                        <input type="text" class="validate" name="nome" id="nome" placeholder="O que mamãe te deu"
-                            required>
-                    </div>
-                    <div class="input-field col s12">
-                        <span id="cadastro-mensagem-email" class="red"></span>
-                        <label for="email-usuario">Email:</label>
-                        <input type="email" class="validate" name="email" id="cadastro-email"
-                            placeholder="Nos passe seu melhor e-mail" required>
-                    </div>
-                    <div class="input-field col s12">
-                        <span id="cadastro-mensagem-senha" class="red"></span>
-                        <label for="senha-usuario">Senha:</label>
-                        <input type="password" class="validate" name="senha" placeholder="secretíssima"
-                            id="cadastro-senha" required>
-                    </div>
-                    <div class="input-field col s12">
-                        <span id="cadastro-mensagem-usuario" class="red"></span>
-                        <label for="usuario">Usuário:</label>
-                        <input type="text" class="validate" name="usuario" id="cadastro-usuario"
-                            placeholder="único no mundo" required>
+                        <div class="input-field col s12">
+                            <label for="nome-usuario">Nome:</label>
+                            <input type="text" class="validate" name="nome" id="nome" placeholder="O que mamãe te deu"
+                                required>
+                        </div>
+                        <div class="input-field col s12">
+                            <span id="cadastro-mensagem-usuario" class="red"></span>
+                            <label for="usuario">Usuário:</label>
+                            <input type="text" class="validate" name="usuario" id="cadastro-usuario"
+                                placeholder="único no mundo" required>
+                        </div>
+                        <div class="input-field col s12">
+                            <span id="cadastro-mensagem-email" class="red"></span>
+                            <label for="email-usuario">Email:</label>
+                            <input type="email" class="validate" name="email" id="cadastro-email"
+                                placeholder="Nos passe seu melhor e-mail" required>
+                        </div>
+                        <div class="input-field col s12">
+                            <span id="cadastro-mensagem-senha" class="red"></span>
+                            <label for="senha-usuario">Senha:</label>
+                            <input type="password" class="validate" name="senha" placeholder="secretíssima"
+                                id="cadastro-senha" required>
+                        </div>
+                        <div class="input-field col s12">
+                            <label for="confirmacao-senha-usuario"> Confirmação de Senha:</label>
+                            <input type="password" class="validate" placeholder="confirme"
+                                id="confirmacao-senha-usuario" required>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-action right-align">
-                <button type="submit" id="cadastro-botao-enviar" class="btn waves-effect waves-light"
-                    value="Cadastrar">Cadastrar
-                    <i class="material-icons right">send</i>
-                </button>
-            </div>
-        </form>
+                <div class="card-action right-align signup-signin-action">
+                    <a class="left btn-action-signup-signin" href="/usuario/login">Login</a>
+                    <button type="submit" id="cadastro-botao-enviar" class="btn waves-effect waves-light"
+                        value="Cadastrar">Cadastrar
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
+</body>
 <script>
     $("#cadastro-email").focusout((e) => {
-        console.log(e);
-        $.ajax({
-            type: "POST",
-            url: "/usuario/emailexiste",
-            data: {
-                email: $("#cadastro-email").val()
-            }
-        }).done(d => {
-            console.log(d);
-            if (d.existe) {
-                $("#cadastro-mensagem-email").html("E-mail já cadastrado.");
-            } else {
-                $("#cadastro-mensagem-email").html("");
-            }
-        });
+
+        let emailuff = /^[a-zA-z\.-_]+(@id\.uff\.br)$/
+        if (emailuff.test($("#cadastro-email").val().toString())) {
+
+            $.ajax({
+                type: "POST",
+                url: "/usuario/emailexiste",
+                data: {
+                    email: $("#cadastro-email").val()
+                }
+            }).done(d => {
+                if (d.existe) {
+                    $("#cadastro-mensagem-email").html("E-mail já cadastrado.");
+                } else {
+                    $("#cadastro-mensagem-email").html("");
+                }
+            });
+        } else {
+            $("#cadastro-mensagem-email").html("Parece que seu e-mail não é da UFF");
+        }
     });
 
     $("#cadastro-usuario").focusout((e) => {
-        console.log($("#cadastro-usuario").val());
         $.ajax({
             type: "POST",
             url: "/usuario/usuarioexiste",
@@ -91,11 +102,35 @@
 
     $("#cadastro-senha").focusout(() => {
         if ($("#cadastro-senha").val().toString().length < 6) {
-            console.log("Entrou no if");
             $("#cadastro-mensagem-senha").html("A senha precisa ter 6 caracteres");
         } else {
-            console.log("Entrou no else");
             $("#cadastro-mensagem-senha").html("");
         }
     });
+
+    $("#confirmacao-senha-usuario").focusout(() => {
+        confirmaCaoSenha();
+    });
+
+    $("#form-cadastro-usuario").on('submit', (e) => {
+        if (confirmaCaoSenha) {
+            $.ajax({
+                type: "POST",
+                url: "/usuario/cadastro",
+                data: $("#form-cadastro-usuario").serialize()
+            });
+        }
+
+    });
+
+    let confirmaCaoSenha = () => {
+        if ($("#cadastro-senha").val().toString() != $("#confirmacao-senha-usuario").val().toString()) {
+            $("#cadastro-mensagem-senha").html("As senhas precisam ser iguais");
+            return false;
+        } else {
+            $("#cadastro-mensagem-senha").html("");
+            return true;
+        }
+    };
+
 </script>
