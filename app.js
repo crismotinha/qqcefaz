@@ -19,12 +19,26 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function (req, res, next) {
+  if(req.url === '/usuario') {
+    next();
+  }
+  else {
+    if(!req.cookies['email']) {
+    	res.render('usuario', { title: 'qqcefaz' });
+    }
+    else {
+      next();
+    }
+  }
+});
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -36,5 +50,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;

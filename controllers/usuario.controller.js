@@ -23,11 +23,12 @@ module.exports = {
     })
     .catch(err => console.log(err));
   },
-  login: (req, res) => {
-    
+  login: (req, res) => {   
     Usuario.find({email: req.body.email})
     .then((usuario) => {
-      res.render("index", { usuario: usuario[0]})
+      res.cookie('nome', usuario[0].nome)
+      res.cookie('email', usuario[0].email)
+      res.redirect("/")
     })
     .catch(err => console.log(err));
   },
