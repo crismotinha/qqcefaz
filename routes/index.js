@@ -9,7 +9,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/usuario', (req, res)=> {
-    console.log();
     if(req.body['action'] == 'cadastro') {
         UsuarioController.createUsuario(req, res);
     }
