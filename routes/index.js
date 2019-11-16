@@ -21,4 +21,12 @@ router.get('/usuario', (req, res)=> {
     res.render('usuario', { title: 'qqcefaz' });
 });
 
+router.get('/meus-produtos', (req, res)=> {
+    res.render('meus-produtos', { title: 'qqcefaz' });
+});
+
+router.get('/novo-produto', (req, res)=> {
+    res.render('novo-produto', { title: 'qqcefaz' });
+});
+
 module.exports = router;

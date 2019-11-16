@@ -1,0 +1,50 @@
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+  <li class="dropdown-title">Ordenar por</li>
+  <li class="divider"></li>
+  <li><a href="#!">Menor Preço</a></li>
+  <li><a href="#!">Categoria</a></li>
+</ul>
+<nav>
+  <div class="nav-wrapper">
+    <a href="#!" class="brand-logo">qqcefaz?</a>
+    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <!-- Dropdown Trigger -->
+      <a class="dropdown-trigger" href="#!" data-target="dropdown1" data-alignment="right"><i class="material-icons right">import_export</i></a>
+  </div>
+</nav>
+<ul class="sidenav" id="mobile-demo">
+  <li class="profile"><img class="avatar-photo" src="https://www.petmd.com/sites/default/files/petmd-kitten-development.jpg"></li>
+  <li class="profile profile-name">{{usuario.nome}}</li>
+  <li class="profile">{{usuario.email}}</li>
+  <li class="divider"></li>
+  <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+  <li><a href="/perfil"><i class="material-icons left">face</i>Perfil</a></li>
+  <li><a href="/meus-produtos"><i class="material-icons left">attach_money</i>Meus Produtos</a></li>
+</ul>
+ {{#if produtos}}
+  <div class="row">
+    {{#each produtos}}
+    <div class="col s6 m6">
+      <div class="card small">
+        <div class="card-image">
+          <img class="imagem" src="{{url}}">
+          <span class="card-title">R${{valor}}</span>
+        </div>
+        <div class="card-content">
+          <a href="#">{{nome}}</a>
+          <a href="#">Vendido por: {{usuario.nome}}</a>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+{{else}}
+<h6 class="text-center">Você não tem nenhum produto :( <br></h4>
+{{/if}}
+
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red" href="/novo-produto">
+    <i class="large material-icons">add</i>
+  </a>
+</div>

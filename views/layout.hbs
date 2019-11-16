@@ -18,8 +18,13 @@
     document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.sidenav');
     var elems2 = document.querySelectorAll('.dropdown-trigger');
+    var elems3 = document.querySelectorAll('.fixed-action-btn');
     var instances = M.Sidenav.init(elems);
     var instances2 = M.Dropdown.init(elems2);
+    var instances3 = M.FloatingActionButton.init(elems3, {
+      direction: 'left',
+      hoverEnabled: false
+    });
   });
 </script>
   </body>
