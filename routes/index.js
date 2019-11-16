@@ -7,11 +7,17 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/usuario', (req, res)=>{
-    UsuarioController.createUsuario(req, res);
+router.post('/usuario', (req, res)=> {
+    console.log();
+    if(req.body['action'] == 'cadastro') {
+        UsuarioController.createUsuario(req, res);
+    }
+    else {
+        UsuarioController.login(req, res);
+    }
 });
 
-router.get('/usuario', (req, res)=>{
+router.get('/usuario', (req, res)=> {
     res.render('usuario', { title: 'Express' });
 });
 

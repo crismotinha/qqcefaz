@@ -23,4 +23,12 @@ module.exports = {
     })
     .catch(err => console.log(err));
   },
+  login: (req, res) => {
+    
+    Usuario.find({email: req.body.email})
+    .then((usuario) => {
+      res.render("index", { usuario: usuario[0]})
+    })
+    .catch(err => console.log(err));
+  },
 }

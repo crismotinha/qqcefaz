@@ -4,22 +4,23 @@
         <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
             <form action="/usuario" method="POST" id="form-login">
                 <div class="card-content">
-                    <span class="card-title">Olá! Faça seu cadastro:</span>
+                    <span class="card-title">Olá!</span>
                     <div class="row">
                         <div class="input-field col s12">
                             <label for="nome">Nome:</label>
-                            <input type="text" name="nome" id="nome" class="validate" placeholder=""
+                            <input type="text" name="nome" id="nome" class="validate" placeholder="Só preencha em caso de cadastro"
                                 value="{{nome}}">
                         </div>
                         <div class="input-field col s12">
                             <label for="email">E-mail:</label>
-                            <input type="email" name="email" id="email" class="validate" placeholder=""
+                            <input type="email" name="email" id="email" class="validate" placeholder="E-mail"
                                 value="{{email}}">
                         </div>
                     </div>
                 </div>
                 <div class="card-action right-align signup-signin-action">
-                    <input type="submit" class="btn waves-effect waves-light center-align btn-login" value="OK">
+                    <input type="submit" class="btn waves-effect waves-light center-align btn-login" name="action" value="cadastro">
+                    <input type="submit" class="btn waves-effect waves-light center-align btn-login" name="action" value="login">
                 </div>
             </form>
         </div>
