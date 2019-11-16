@@ -22,9 +22,9 @@
   <li><a href="/perfil"><i class="material-icons left">face</i>Perfil</a></li>
   <li><a href="/meus-produtos"><i class="material-icons left">attach_money</i>Meus Produtos</a></li>
 </ul>
- {{#if produtos}}
+ {{#if usuario.produtos}}
   <div class="row">
-    {{#each produtos}}
+    {{#each usuario.produtos}}
     <div class="col s6 m6">
       <div class="card small">
         <div class="card-image">
@@ -33,7 +33,7 @@
         </div>
         <div class="card-content">
           <a href="#">{{nome}}</a>
-          <a href="#">Vendido por: {{usuario.nome}}</a>
+          <a href="#">{{descricao}}</a>
         </div>
       </div>
     </div>

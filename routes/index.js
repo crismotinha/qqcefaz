@@ -22,11 +22,16 @@ router.get('/usuario', (req, res)=> {
 });
 
 router.get('/meus-produtos', (req, res)=> {
-    res.render('meus-produtos', { title: 'qqcefaz' });
+    UsuarioController.getProduto(req, res);
 });
 
 router.get('/novo-produto', (req, res)=> {
     res.render('novo-produto', { title: 'qqcefaz' });
 });
+
+router.post('/novo-produto', (req, res)=> {
+    UsuarioController.addProduto(req, res);
+});
+
 
 module.exports = router;

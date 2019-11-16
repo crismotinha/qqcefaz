@@ -22,11 +22,14 @@
   <li><a href="/perfil"><i class="material-icons left">face</i>Perfil</a></li>
   <li><a href="/meus-produtos"><i class="material-icons left">attach_money</i>Meus Produtos</a></li>
 </ul>
-<form action="/produto" method="POST" id="form-login">
+<form action="/novo-produto" method="POST" id="form-login">
   <label for="nome">Nome:</label>
   <input type="text" name="nome" id="nome" value="{{nome}}">
+  <label for="descricao">Descrição:</label>
   <input type="text" name="descricao" id="descricao" value="{{descricao}}">
+  <label for="valor">Valor:</label>
   <input type="number" name="valor" id="valor" value="{{valor}}">
+  <label for="url">URL:</label>
   <input type="text" name="url" id="url" value="{{url}}">        
   <div class="card-action right-align signup-signin-action">
       <input type="submit" class="btn waves-effect waves-light center-align btn-login" name="action" value="Adicionar">
