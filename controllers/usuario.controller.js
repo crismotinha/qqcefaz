@@ -9,12 +9,31 @@ const Produto = mongoose.model(('Produto'), new mongoose.Schema({
   valor: Number,
   url: String,
   userEmail: String,
+  userName: String,
 }));
 
 const Usuario = mongoose.model(('Usuario'), new mongoose.Schema({
   nome: String,
   email: String,
+  campus: [],
+  turnos: [],
 }));
+
+const getCampus = (body) => {
+  const campus = [];
+  Object.keys(body).forEach(atributo => {
+    if(atributo.substring(0,3) === 'CAM' && body[atributo] === 'on') campus.push(atributo.substring(3,atributo.length));
+  })
+  return campus;
+};
+
+const getTurnos = (body) => {
+  const turno = [];
+  Object.keys(body).forEach(atributo => {
+    if(atributo.substring(0,3) === 'TUR' && body[atributo] === 'on') turno.push(atributo.substring(3,atributo.length));
+  })
+  return turno;
+};
 
 module.exports = {
   createUsuario: (req, res) => {
@@ -47,6 +66,7 @@ module.exports = {
       valor: req.body.valor,
       url: req.body.url,
       userEmail: usuario.email,
+      userName: usuario.nome,
     };
 
     const query = idProduto ? { _id: mongoose.Types.ObjectId(idProduto) } : { _id: mongoose.Types.ObjectId() };
@@ -85,5 +105,33 @@ module.exports = {
       res.redirect('/meus-produtos');
     })
     .catch(err => console.log(err));
+  },
+  getProdutoAllInfos: (req, res, idProduto, emailVendedor) => {
+    Promise.all([Produto.findOne({_id: idProduto}), Usuario.findOne({email: emailVendedor})])
+    .then(([produto, usuario]) => res.render('produto', { title: 'qqcefaz', produto, usuario }))
+    .catch(err => console.log(err));
+  },
+  getPerfil: (req, res, email) => {
+    Usuario.findOne({email: email})
+    .then(usuario => res.render('perfil', { title: 'qqcefaz', usuario}))
+  },
+  updatePerfil: (req, res) => {
+    const campus = getCampus(req.body);
+    const turnos = getTurnos(req.body);
+
+    Usuario.findById(req.body.idUsuario)
+    .then(usuario => {
+      usuario.nome= req.body.nome;
+      usuario.campus= campus;
+      usuario.turnos= turnos;
+
+      return usuario.save()
+    })
+    .then(usuario => {
+      res.cookie('nome', usuario.nome);
+      res.render('perfil', { title: 'qqcefaz', usuario})
+    })
+    .catch(err => console.log(err));
+
   },
 }

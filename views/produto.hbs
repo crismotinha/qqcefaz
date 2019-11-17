@@ -22,25 +22,18 @@
   <li><a href="/perfil"><i class="material-icons left">face</i>Perfil</a></li>
   <li><a href="/meus-produtos"><i class="material-icons left">attach_money</i>Meus Produtos</a></li>
 </ul>
-  {{#if produtos}}
-  <div class="row">
-    {{#each produtos}}
-    <div class="col s6 m6">
-      <div class="card small">
-        <div class="card-image">
-          <img class="imagem" src="{{url}}">
-          <span class="card-title">R${{valor}}</span>
-        </div>
-        <div class="card-content">
-          <a href="#">{{nome}}</a>
-          <a href="#">{{descricao}}</a>
-          <a href="#">Vendido por: {{userName}}</a>
-          <a href="/comprar-produto?id={{_id}}&emailVendedor={{userEmail}}">Ver mais </a>
-        </div>
-      </div>
+<div class="row">
+  <div class="card s12">
+    <div class="card-image">
+      <img class="imagem" src="{{produto.url}}">
+      <span class="card-title">R${{produto.valor}}</span>
     </div>
-    {{/each}}
+    <div class="card-content">
+      <p>{{produto.nome}}</p>
+      <p>{{produto.descricao}}</p>
+      <p>Vendido por: {{produto.userName}}</p>
+      <p>Campus: {{usuario.campus}}</p>
+      <p>Horário: {{usuario.horario}}</p>
+    </div>
   </div>
-{{else}}
-<h6 class="text-center">Não existem produtos a venda :( <br></h4>
-{{/if}}
+</div>

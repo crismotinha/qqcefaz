@@ -19,7 +19,7 @@ router.post('/usuario', (req, res)=> {
 });
 
 router.get('/usuario', (req, res)=> {
-    res.render('usuario', { title: 'qqcefaz' });
+    res.render('login', { title: 'qqcefaz' });
 });
 
 router.get('/meus-produtos', (req, res)=> {
@@ -44,6 +44,21 @@ router.get('/deletar-produto', (req, res)=> {
     const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
     const id = req.query.id;
     UsuarioController.deleteProduto(req, res, user, id);
+});
+
+router.get('/comprar-produto', (req, res)=> {
+    const id = req.query.id;
+    const emailVendedor = req.query.emailVendedor;
+    UsuarioController.getProdutoAllInfos(req, res, id, emailVendedor);
+});
+
+router.post('/perfil', (req, res) => {
+    UsuarioController.updatePerfil(req, res);
+})
+
+router.get('/perfil', (req, res)=> {
+    const email = req.cookies["email"];
+    UsuarioController.getPerfil(req, res, email);
 });
 
 module.exports = router;

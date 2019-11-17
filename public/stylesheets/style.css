@@ -152,3 +152,7 @@ nav {
 .signup-signin-action input {
   color: white;
 }
+
+.card-link {
+  display:block;
+}
