@@ -66,4 +66,11 @@ module.exports = {
     Produto.find({})
     .then(produtos => res.render('index', { title: 'qqcefaz', produtos, usuario }))
   },
+  deleteProduto: (req, res, usuario, idProduto) => {
+    Produto.deleteOne({userEmail: usuario.email, _id: idProduto})
+    .then((produto) => {
+      res.redirect('/meus-produtos');
+    })
+    .catch(err => console.log(err));
+  },
 }

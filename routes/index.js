@@ -35,5 +35,10 @@ router.post('/novo-produto', (req, res)=> {
     UsuarioController.addProduto(req, res, user);
 });
 
+router.get('/deletar-produto', (req, res)=> {
+    const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
+    const id = req.query.id;
+    UsuarioController.deleteProduto(req, res, user, id);
+});
 
 module.exports = router;
