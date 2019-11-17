@@ -26,13 +26,16 @@ router.get('/meus-produtos', (req, res)=> {
     UsuarioController.getProduto(req, res, user);
 });
 
-router.get('/novo-produto', (req, res)=> {
-    res.render('novo-produto', { title: 'qqcefaz' });
+router.get('/produto', (req, res)=> {
+    const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
+    const id = req.query.id;
+    UsuarioController.getProdutoById(req, res, user, id);
 });
 
-router.post('/novo-produto', (req, res)=> {
+router.post('/produto', (req, res)=> {
     const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
-    UsuarioController.addProduto(req, res, user);
+    const id = req.body.idProduto;
+    UsuarioController.addOrEditProduto(req, res, user, id);
 });
 
 router.get('/deletar-produto', (req, res)=> {

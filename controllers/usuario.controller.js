@@ -40,18 +40,27 @@ module.exports = {
     })
     .catch(err => console.log(err));
   },
-  addProduto: (req, res, usuario) => {
-    const produto = new Produto({
+  addOrEditProduto: (req, res, usuario, idProduto) => {
+    const produto = {
       nome: req.body.nome,
       descricao: req.body.descricao,
       valor: req.body.valor,
       url: req.body.url,
       userEmail: usuario.email,
-    });
+    };
 
-    produto.save()
+    const query = idProduto ? { _id: mongoose.Types.ObjectId(idProduto) } : { _id: mongoose.Types.ObjectId() };
+
+    Produto.findByIdAndUpdate(query, produto, {upsert: true})
     .then(() => {
       res.redirect("/meus-produtos");
+    })
+    .catch(err => console.log(err));
+  },
+  getProdutoById: (req, res, usuario, idProduto) => {
+    Produto.findOne({userEmail: usuario.email, _id: idProduto})
+    .then((produto) => {
+      res.render('novo-produto', { title: 'qqcefaz', usuario, produto });
     })
     .catch(err => console.log(err));
   },

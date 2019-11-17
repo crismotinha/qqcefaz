@@ -34,7 +34,7 @@
         <div class="card-content">
           <a href="#">{{nome}}</a>
           <a href="#">{{descricao}}</a>
-          <i class="small material-icons">edit</i>
+          <a href="/produto?id={{_id}}"><i class="small material-icons">edit</i></a>
           <a href="/deletar-produto?id={{_id}}"><i class="small material-icons">delete</i></a>
         </div>
       </div>
@@ -46,7 +46,7 @@
 {{/if}}
 
 <div class="fixed-action-btn">
-  <a class="btn-floating btn-large red" href="/novo-produto">
+  <a class="btn-floating btn-large red" href="/produto">
     <i class="large material-icons">add</i>
   </a>
 </div>
