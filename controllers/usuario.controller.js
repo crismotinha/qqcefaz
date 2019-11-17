@@ -64,15 +64,16 @@ module.exports = {
     })
     .catch(err => console.log(err));
   },
-  getProduto: (req, res, usuario) => {
+  getProduto: (req, res, usuario, orderBy) => {
+    const sort = orderBy ? orderBy : {};
     Produto.find({userEmail: usuario.email})
+    .sort(sort)
     .then((produtos) => {
       res.render('meus-produtos', { title: 'qqcefaz', usuario, produtos });
     })
     .catch(err => console.log(err));
   },
   getAllProdutos: (req, res, usuario, orderBy) => {
-    console.log('order by', orderBy)
     const sort = orderBy ? orderBy : {};
     Produto.find({})
     .sort(sort)

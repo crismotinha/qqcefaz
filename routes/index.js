@@ -24,7 +24,8 @@ router.get('/usuario', (req, res)=> {
 
 router.get('/meus-produtos', (req, res)=> {
     const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
-    UsuarioController.getProduto(req, res, user);
+    const orderBy = req.query.orderBy;
+    UsuarioController.getProduto(req, res, user, orderBy);
 });
 
 router.get('/produto', (req, res)=> {
