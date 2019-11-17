@@ -127,10 +127,7 @@ module.exports = {
 
       return usuario.save()
     })
-    .then(usuario => {
-      res.cookie('nome', usuario.nome);
-      res.render('perfil', { title: 'qqcefaz', usuario})
-    })
+    .then(usuario => res.render('perfil', { title: 'qqcefaz', usuario}))
     .catch(err => console.log(err));
 
   },
