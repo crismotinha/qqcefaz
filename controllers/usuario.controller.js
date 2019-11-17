@@ -44,9 +44,9 @@ module.exports = {
 
     usuario.save()
     .then(() => {
-      res.json({
-        title: "Usuario criado!",
-      });
+      res.cookie('nome', usuario.nome)
+      res.cookie('email', usuario.email)
+      res.redirect("/")
     })
     .catch(err => console.log(err));
   },
