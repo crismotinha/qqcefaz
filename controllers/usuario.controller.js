@@ -3,17 +3,17 @@ const db = require("../services/database.service");
 
 db.dbConnect();
 
-const Produto = mongoose.Schema({
+const Produto = mongoose.model(('Produto'), new mongoose.Schema({
   nome: String,
   descricao: String,
   valor: Number,
   url: String,
-});
+  userEmail: String,
+}));
 
 const Usuario = mongoose.model(('Usuario'), new mongoose.Schema({
   nome: String,
   email: String,
-  produtos: [Produto],
 }));
 
 module.exports = {
@@ -21,7 +21,6 @@ module.exports = {
     const usuario = new Usuario({
       nome: req.body.nome,
       email: req.body.email,
-      produtos: [],
     });
 
     usuario.save()
@@ -42,23 +41,27 @@ module.exports = {
     .catch(err => console.log(err));
   },
   addProduto: (req, res) => {
-    const produto = {
+    const produto = new Produto({
       nome: req.body.nome,
       descricao: req.body.descricao,
       valor: req.body.valor,
       url: req.body.url,
-    };
-    const email = req.cookies['email'];
-    Usuario.findOneAndUpdate({email}, {$push: {'produtos': produto}}, {new:true})
-    .then((user) => {
+      userEmail: req.cookies['email'],
+    });
+
+    produto.save()
+    .then(() => {
       res.redirect("/meus-produtos");
     })
     .catch(err => console.log(err));
   },
   getProduto: (req, res) => {
-    Usuario.findOne({email: req.cookies['email']})
-    .then((usuario) => {
-      res.render('meus-produtos', { title: 'qqcefaz', usuario });
+    const email = req.cookies['email']
+    Promise.all([
+      Produto.find({userEmail: email}), 
+      Usuario.findOne({email: email})])
+    .then(([produtos, usuario]) => {
+      res.render('meus-produtos', { title: 'qqcefaz', usuario, produtos });
     })
     .catch(err => console.log(err));
   }
