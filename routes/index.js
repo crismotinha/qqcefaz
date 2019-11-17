@@ -18,6 +18,10 @@ router.post('/usuario', (req, res)=> {
     }
 });
 
+router.get('/logout', (req, res)=> {
+    UsuarioController.logout(req, res);
+});
+
 router.get('/usuario', (req, res)=> {
     res.render('login', { title: 'qqcefaz' });
 });
@@ -59,6 +63,17 @@ router.post('/perfil', (req, res) => {
 router.get('/perfil', (req, res)=> {
     const email = req.cookies["email"];
     UsuarioController.getPerfil(req, res, email);
+});
+
+router.get('/denuncia', (req, res)=> {
+    const email = req.cookies["email"];
+    const id = req.query.id;
+    UsuarioController.getProdutoDenuncia(req, res, id);
+});
+
+router.post('/denuncia', (req, res)=> {
+    const email = req.cookies["email"];
+    UsuarioController.postProdutoDenuncia(req, res, email);
 });
 
 module.exports = router;

@@ -1,7 +1,22 @@
+const nodemailer = require('nodemailer');
 const mongoose = require("mongoose");
 const db = require("../services/database.service");
 
 db.dbConnect();
+
+const emailGerencial = process.env.EMAIL;
+const emailPass = process.env.EMAIL_PASSWORD;
+
+
+let transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false,
+  auth: {
+    user: emailGerencial,
+    pass: emailPass
+  }
+});
 
 const Produto = mongoose.model(('Produto'), new mongoose.Schema({
   nome: String,
@@ -58,6 +73,11 @@ module.exports = {
       res.redirect("/")
     })
     .catch(err => console.log(err));
+  },
+  logout: (req, res) => {   
+    res.clearCookie('nome');
+    res.clearCookie('email');
+    res.redirect("/")
   },
   addOrEditProduto: (req, res, usuario, idProduto) => {
     const produto = {
@@ -158,6 +178,31 @@ module.exports = {
     })
     .then(usuario => res.render('perfil', { title: 'qqcefaz', usuario}))
     .catch(err => console.log(err));
+  },
+  getProdutoDenuncia: (req, res, idProduto) => {
+    Produto.findOne({_id: idProduto})
+    .then(produto => res.render('denuncia', {title: 'qqcefaz', produto}))
+  },
+  postProdutoDenuncia: (req, res, email) => {
+    console.log(email, req.body);
+    const text = `Recebemos uma denúncia, feita pelo usuário ${email}. Seguem os detalhes: ${JSON.stringify(req.body)}`
+    console.log(text);
+
+    transporter.sendMail(
+      {
+        from: emailGerencial,
+        to: 'cmotinha@id.uff.br',
+        subject: 'denuncia',
+        text: text
+      },
+      (err, resp) => {
+        if (err) console.log(err);
+        console.log(resp)
+        res.redirect('/');
+      }); 
+
+
 
   },
+
 }
