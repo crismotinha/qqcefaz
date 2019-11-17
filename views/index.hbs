@@ -23,29 +23,24 @@
   <li><a href="/meus-produtos"><i class="material-icons left">attach_money</i>Meus Produtos</a></li>
 </ul>
 
+  {{#if produtos}}
   <div class="row">
+    {{#each produtos}}
     <div class="col s6 m6">
       <div class="card small">
         <div class="card-image">
-          <img class="imagem" src="https://www.petmd.com/sites/default/files/petmd-kitten-development.jpg">
-          <span class="card-title">R$10,00</span>
+          <img class="imagem" src="{{url}}">
+          <span class="card-title">R${{valor}}</span>
         </div>
         <div class="card-content">
-          <a href="#">Gatinho fofinho</a>
-          <a href="#">Vendido por: @mione</a>
+          <a href="#">{{nome}}</a>
+          <a href="#">{{descricao}}</a>
+          <a href="#">Vendido por: {{userEmail}}</a>
         </div>
       </div>
     </div>
-    <div class="col s6 m6">
-      <div class="card small">
-        <div class="card-image">
-          <img class="imagem" src="https://www.petmd.com/sites/default/files/petmd-kitten-development.jpg">
-          <span class="card-title">R$10,00</span>
-        </div>
-        <div class="card-content">
-          <a href="#">Gatinho fofinho</a>
-          <a href="#">Vendido por: @mione</a>
-        </div>
-      </div>
-    </div>
+    {{/each}}
   </div>
+{{else}}
+<h6 class="text-center">Não existem produtos a venda :( <br></h4>
+{{/if}}

@@ -40,13 +40,13 @@ module.exports = {
     })
     .catch(err => console.log(err));
   },
-  addProduto: (req, res) => {
+  addProduto: (req, res, usuario) => {
     const produto = new Produto({
       nome: req.body.nome,
       descricao: req.body.descricao,
       valor: req.body.valor,
       url: req.body.url,
-      userEmail: req.cookies['email'],
+      userEmail: usuario.email,
     });
 
     produto.save()
@@ -55,14 +55,15 @@ module.exports = {
     })
     .catch(err => console.log(err));
   },
-  getProduto: (req, res) => {
-    const email = req.cookies['email']
-    Promise.all([
-      Produto.find({userEmail: email}), 
-      Usuario.findOne({email: email})])
-    .then(([produtos, usuario]) => {
+  getProduto: (req, res, usuario) => {
+    Produto.find({userEmail: usuario.email})
+    .then((produtos) => {
       res.render('meus-produtos', { title: 'qqcefaz', usuario, produtos });
     })
     .catch(err => console.log(err));
-  }
+  },
+  getAllProdutos: (req, res, usuario) => {
+    Produto.find({})
+    .then(produtos => res.render('index', { title: 'qqcefaz', produtos, usuario }))
+  },
 }

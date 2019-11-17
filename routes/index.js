@@ -5,7 +5,7 @@ const UsuarioController = require('../controllers/usuario.controller');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
-  res.render('index', { title: 'qqcefaz', usuario:user });
+  UsuarioController.getAllProdutos(req, res, user);
 });
 
 router.post('/usuario', (req, res)=> {
@@ -22,7 +22,8 @@ router.get('/usuario', (req, res)=> {
 });
 
 router.get('/meus-produtos', (req, res)=> {
-    UsuarioController.getProduto(req, res);
+    const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
+    UsuarioController.getProduto(req, res, user);
 });
 
 router.get('/novo-produto', (req, res)=> {
@@ -30,7 +31,8 @@ router.get('/novo-produto', (req, res)=> {
 });
 
 router.post('/novo-produto', (req, res)=> {
-    UsuarioController.addProduto(req, res);
+    const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
+    UsuarioController.addProduto(req, res, user);
 });
 
 
