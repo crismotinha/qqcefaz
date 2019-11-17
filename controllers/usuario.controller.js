@@ -161,7 +161,7 @@ module.exports = {
     transporter.sendMail(
       {
         from: emailGerencial,
-        to: 'cmotinha@id.uff.br',
+        to: 'salveosbichin@gmail.com',
         subject: 'denuncia',
         text: text
       },
