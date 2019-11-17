@@ -2,8 +2,9 @@
 <ul id="dropdown1" class="dropdown-content">
   <li class="dropdown-title">Ordenar por</li>
   <li class="divider"></li>
-  <li><a href="#!">Menor Preço</a></li>
-  <li><a href="#!">Categoria</a></li>
+  <li><a href="/?orderBy=valor">Menor Preço</a></li>
+  <li><a href="/?orderBy=-valor">Maior Preço</a></li>
+  <li><a href="/?orderBy=nome">Nome</a></li>
 </ul>
 <nav>
   <div class="nav-wrapper">
@@ -22,7 +23,6 @@
   <li><a href="/perfil"><i class="material-icons left">face</i>Perfil</a></li>
   <li><a href="/meus-produtos"><i class="material-icons left">attach_money</i>Meus Produtos</a></li>
 </ul>
-
   {{#if produtos}}
   <div class="row">
     {{#each produtos}}

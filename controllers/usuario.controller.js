@@ -71,8 +71,11 @@ module.exports = {
     })
     .catch(err => console.log(err));
   },
-  getAllProdutos: (req, res, usuario) => {
+  getAllProdutos: (req, res, usuario, orderBy) => {
+    console.log('order by', orderBy)
+    const sort = orderBy ? orderBy : {};
     Produto.find({})
+    .sort(sort)
     .then(produtos => res.render('index', { title: 'qqcefaz', produtos, usuario }))
   },
   deleteProduto: (req, res, usuario, idProduto) => {
