@@ -22,6 +22,39 @@
   <li><a href="/perfil"><i class="material-icons left">face</i>Perfil</a></li>
   <li><a href="/meus-produtos"><i class="material-icons left">attach_money</i>Meus Produtos</a></li>
 </ul>
+Campus:
+<form action="/" method="GET"><label>
+    <input type="checkbox" class="filled-in" name="CAMGragoatá" />
+    <span>Gragoatá</span>
+  </label>
+    <label>
+    <input type="checkbox" class="filled-in" name="CAMPraia Vermelha" />
+    <span>Praia Vermelha</span>
+  </label>
+    <label>
+    <input type="checkbox" class="filled-in" name="CAMValonguinho" />
+    <span>Valonguinho</span>
+  </label>
+    <label>
+    <input type="checkbox" class="filled-in" name="CAMIACS" />
+    <span>IACS</span>
+  </label>
+  <br>Horário:
+  <label>
+    <input type="checkbox" class="filled-in" name="TURManhã" />
+    <span>Manhã</span>
+  </label>
+   <label>
+    <input type="checkbox" class="filled-in" name="TURTarde" />
+    <span>Tarde</span>
+  </label>
+ <label>
+    <input type="checkbox" class="filled-in" name="TURNoite" />
+    <span>Noite</span>
+  </label>
+  <input type="submit" class="btn waves-effect waves-light center-align btn-login" name="action" value="Filtrar por campus e horário">
+</form>
+
   {{#if produtos}}
   <div class="row">
     {{#each produtos}}

@@ -4,9 +4,10 @@ const UsuarioController = require('../controllers/usuario.controller');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    console.log(req.query);
   const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
-  const orderBy = req.query.orderBy;
-  UsuarioController.getAllProdutos(req, res, user, orderBy);
+  const query = req.query;
+  UsuarioController.getAllProdutos(req, res, user, query);
 });
 
 router.post('/usuario', (req, res)=> {

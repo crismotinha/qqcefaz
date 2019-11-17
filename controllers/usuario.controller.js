@@ -93,8 +93,36 @@ module.exports = {
     })
     .catch(err => console.log(err));
   },
-  getAllProdutos: (req, res, usuario, orderBy) => {
-    const sort = orderBy ? orderBy : {};
+  getAllProdutos: (req, res, usuario, query) => {
+    const filterCampus = getCampus(query);
+    const filterTurnos = getTurnos(query);
+    console.log(filterCampus, filterTurnos)
+    const sort = query.orderBy ? query.orderBy : {};
+
+    if (filterCampus.length > 0 || filterTurnos.length > 0) {
+      const filter = {};
+      if (filterCampus.length > 0) {
+        filter['campus'] = { '$in': filterCampus }
+      }
+      if (filterTurnos.length > 0) {
+        filter['turnos'] = { '$in': filterTurnos }
+      }
+
+      Usuario.find(filter)
+      .then(usuarios => {
+        const arrayUsrID = []
+        usuarios.forEach(usuario => arrayUsrID.push(usuario.email));
+        if (arrayUsrID.length > 0) {
+          return Produto.find({ userEmail: { '$in': arrayUsrID}})
+        }
+        else {
+          return Promise.resolve([]);
+        }
+      })
+      .then(produtos => res.render('index', { title: 'qqcefaz', produtos, usuario }))
+      .catch(err=>console.log(err));
+    }
+
     Produto.find({})
     .sort(sort)
     .then(produtos => res.render('index', { title: 'qqcefaz', produtos, usuario }))
