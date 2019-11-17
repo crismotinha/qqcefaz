@@ -96,7 +96,6 @@ module.exports = {
   getAllProdutos: (req, res, usuario, query) => {
     const filterCampus = getCampus(query);
     const filterTurnos = getTurnos(query);
-    console.log(filterCampus, filterTurnos)
     const sort = query.orderBy ? query.orderBy : {};
 
     if (filterCampus.length > 0 || filterTurnos.length > 0) {
@@ -122,10 +121,12 @@ module.exports = {
       .then(produtos => res.render('index', { title: 'qqcefaz', produtos, usuario }))
       .catch(err=>console.log(err));
     }
+    else {
+      Produto.find({})
+      .sort(sort)
+      .then(produtos => res.render('index', { title: 'qqcefaz', produtos, usuario }))
+    }
 
-    Produto.find({})
-    .sort(sort)
-    .then(produtos => res.render('index', { title: 'qqcefaz', produtos, usuario }))
   },
   deleteProduto: (req, res, usuario, idProduto) => {
     Produto.deleteOne({userEmail: usuario.email, _id: idProduto})

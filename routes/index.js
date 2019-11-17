@@ -4,7 +4,6 @@ const UsuarioController = require('../controllers/usuario.controller');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    console.log(req.query);
   const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
   const query = req.query;
   UsuarioController.getAllProdutos(req, res, user, query);
