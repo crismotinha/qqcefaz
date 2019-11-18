@@ -19,8 +19,8 @@ let transporter = nodemailer.createTransport({
 });
 
 const Produto = mongoose.model(('Produto'), new mongoose.Schema({
-  nome: String,
-  descricao: String,
+  nome: {type: String, unique : true, required: true},
+  descricao: {type: String, required: true},
   valor: Number,
   url: String,
   userEmail: String,
@@ -28,8 +28,8 @@ const Produto = mongoose.model(('Produto'), new mongoose.Schema({
 }));
 
 const Usuario = mongoose.model(('Usuario'), new mongoose.Schema({
-  nome: String,
-  email: String,
+  nome: {type: String, required: true},
+  email: {type: String, unique : true, required: true},
   campus: [],
   turnos: [],
 }));
@@ -50,12 +50,14 @@ const getTurnos = (body) => {
   return turno;
 };
 
+
 module.exports = {
   // Home
   getAllProdutos: (req, res, usuario, query) => {
     const filterCampus = getCampus(query);
     const filterTurnos = getTurnos(query);
     const sort = query.orderBy ? query.orderBy : {};
+    const erro = "ue"
 
     if (filterCampus.length > 0 || filterTurnos.length > 0) {
       const filter = {};
@@ -78,23 +80,41 @@ module.exports = {
         }
       })
       .then(produtos => res.render('index', { title: 'qqcefaz', produtos, usuario }))
-      .catch(err=>console.log(err));
+      .catch(err=>{
+        console.log(err);
+        const erro = 'Aconteceu um erro ao filtrar. Tente novamente';
+        res.render('index', { title: 'qqcefaz', usuario, erro })
+      });
     }
     else {
       Produto.find({})
       .sort(sort)
       .then(produtos => res.render('index', { title: 'qqcefaz', produtos, usuario }))
+      .catch(err => {
+        console.log(err);
+        const erro = 'Aconteceu um erro ao carregar a página. Tente novamente';
+        res.render('index', { title: 'qqcefaz', usuario, erro })
+      })
     }
   },
   // Login e logout
   login: (req, res) => {   
     Usuario.findOne({email: req.body.email})
     .then((usuario) => {
-      res.cookie('nome', usuario.nome)
-      res.cookie('email', usuario.email)
-      res.redirect("/")
+      if(usuario) {
+        res.cookie('nome', usuario.nome)
+        res.cookie('email', usuario.email)
+        res.redirect("/")
+      }
+      else {
+        return Promise.reject('Usuário não existe');
+      }
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        console.log(err);
+        const erro = 'Usuário não existe. Tente novamente';
+        res.render('login', { title: 'qqcefaz', erro })
+      });
   },
   logout: (req, res) => {   
     res.clearCookie('nome');
@@ -107,7 +127,11 @@ module.exports = {
     .then((produto) => {
       res.render('novo-produto', { title: 'qqcefaz', usuario, produto });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        console.log(err);
+        const erro = 'Aconteceu um erro. Tente novamente';
+        res.render('index', { title: 'qqcefaz', usuario, erro })
+      });
   },
   getProduto: (req, res, usuario, orderBy) => {
     const sort = orderBy ? orderBy : {};
@@ -116,7 +140,11 @@ module.exports = {
     .then((produtos) => {
       res.render('meus-produtos', { title: 'qqcefaz', usuario, produtos });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        console.log(err);
+        const erro = 'Aconteceu um erro. Tente novamente';
+        res.render('index', { title: 'qqcefaz', usuario, erro })
+      });
   },
   addOrEditProduto: (req, res, usuario, idProduto) => {
     const produto = {
@@ -134,24 +162,41 @@ module.exports = {
     .then(() => {
       res.redirect("/meus-produtos");
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        console.log(err);
+        const erro = 'Aconteceu um erro. Tente novamente';
+        res.render('index', { title: 'qqcefaz', usuario, erro })
+      });
   },
   deleteProduto: (req, res, usuario, idProduto) => {
     Produto.deleteOne({userEmail: usuario.email, _id: idProduto})
     .then((produto) => {
       res.redirect('/meus-produtos');
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+        console.log(err);
+        const erro = 'Aconteceu um erro. Tente novamente';
+        res.render('index', { title: 'qqcefaz', usuario, erro })
+      });
   },
   // Visualizando um produto específico e denuncia
   getProdutoAllInfos: (req, res, idProduto, emailVendedor) => {
     Promise.all([Produto.findOne({_id: idProduto}), Usuario.findOne({email: emailVendedor})])
     .then(([produto, usuario]) => res.render('produto', { title: 'qqcefaz', produto, usuario }))
-    .catch(err => console.log(err));
+    .catch(err => {
+        console.log(err);
+        const erro = 'Aconteceu um erro. Tente novamente';
+        res.render('index', { title: 'qqcefaz', usuario, erro })
+      });
   },
   getProdutoDenuncia: (req, res, idProduto) => {
     Produto.findOne({_id: idProduto})
     .then(produto => res.render('denuncia', {title: 'qqcefaz', produto}))
+    .catch(err => {
+        console.log(err);
+        const erro = 'Aconteceu um erro. Tente novamente';
+        res.render('index', { title: 'qqcefaz', usuario, erro })
+      })
   },
   postProdutoDenuncia: (req, res, email) => {
     console.log(email, req.body);
@@ -166,29 +211,51 @@ module.exports = {
         text: text
       },
       (err, resp) => {
-        if (err) console.log(err);
-        console.log(resp)
-        res.redirect('/');
+        if (err) {
+          console.log(err);
+          const erro = 'Aconteceu um erro. Tente novamente';
+          res.render('index', { title: 'qqcefaz', usuario, erro })
+        }
+        else{
+          res.redirect('/');
+        }
       }); 
   },
   // Gestão de conta do usuário
   createUsuario: (req, res) => {
-    const usuario = new Usuario({
-      nome: req.body.nome,
-      email: req.body.email,
-    });
+    Usuario.findOne({email: req.body.email})
+    .then(usuario => {
+      if (usuario) {
+        const erro = 'Já existe um usuário com esse e-mail. Faça login ou tente outro email';
+        res.render('login', { title: 'qqcefaz', erro })
+      } else {
+        const usuario = new Usuario({
+          nome: req.body.nome,
+          email: req.body.email,
+        });
 
-    usuario.save()
+        return usuario.save()
+      }
+    })
     .then(() => {
       res.cookie('nome', usuario.nome)
       res.cookie('email', usuario.email)
       res.redirect("/")
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+          console.log(err);
+          const erro = 'Aconteceu um erro. Tente novamente';
+          res.render('index', { title: 'qqcefaz', usuario, erro })
+        });
   },  
   getPerfil: (req, res, email) => {
     Usuario.findOne({email: email})
     .then(usuario => res.render('perfil', { title: 'qqcefaz', usuario}))
+    .catch(err => {
+          console.log(err);
+          const erro = 'Aconteceu um erro. Tente novamente';
+          res.render('index', { title: 'qqcefaz', usuario, erro })
+        })
   },
   updatePerfil: (req, res) => {
     const campus = getCampus(req.body);
@@ -203,7 +270,11 @@ module.exports = {
       return usuario.save()
     })
     .then(usuario => res.render('perfil', { title: 'qqcefaz', usuario}))
-    .catch(err => console.log(err));
+    .catch(err => {
+          console.log(err);
+          const erro = 'Aconteceu um erro. Tente novamente';
+          res.render('index', { title: 'qqcefaz', usuario, erro })
+        })
   },
 
 
