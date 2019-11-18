@@ -15,7 +15,7 @@ router.get('/logout', (req, res)=> {
 });
 
 router.get('/usuario', (req, res)=> {
-    res.render('login', { title: 'qqcefaz' });
+    res.render('login', { title: 'qqcefaz', login: true });
 });
 
 // Gestão de produtos do usuário

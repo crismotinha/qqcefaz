@@ -113,7 +113,7 @@ module.exports = {
     .catch(err => {
         console.log(err);
         const erro = 'Usuário não existe. Tente novamente';
-        res.render('login', { title: 'qqcefaz', erro })
+        res.render('login', { title: 'qqcefaz', erro , login: true })
       });
   },
   logout: (req, res) => {   
@@ -227,7 +227,7 @@ module.exports = {
     .then(usuario => {
       if (usuario) {
         const erro = 'Já existe um usuário com esse e-mail. Faça login ou tente outro email';
-        res.render('login', { title: 'qqcefaz', erro })
+        res.render('login', { title: 'qqcefaz', erro, login: true })
       } else {
         const usuario = new Usuario({
           nome: req.body.nome,

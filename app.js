@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
   }
   else {
     if(!req.cookies['email']) {
-    	res.render('login', { title: 'qqcefaz' });
+    	res.render('login', { title: 'qqcefaz', login: true});
     }
     else {
       next();
