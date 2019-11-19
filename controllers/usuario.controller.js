@@ -237,7 +237,7 @@ module.exports = {
         return usuario.save()
       }
     })
-    .then(() => {
+    .then((usuario) => {
       res.cookie('nome', usuario.nome)
       res.cookie('email', usuario.email)
       res.redirect("/")
