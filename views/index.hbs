@@ -2,50 +2,62 @@
 <ul id="dropdown1" class="dropdown-content">
   <li class="dropdown-title">Ordenar por</li>
   <li class="divider"></li>
-  <li><a href="#!">Menor Preço</a></li>
-  <li><a href="#!">Categoria</a></li>
-</ul>
-<nav>
-  <div class="nav-wrapper">
-    <a href="#!" class="brand-logo">qqcefaz?</a>
-    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-    <!-- Dropdown Trigger -->
-      <a class="dropdown-trigger" href="#!" data-target="dropdown1" data-alignment="right"><i class="material-icons right">import_export</i></a>
-  </div>
-</nav>
-<ul class="sidenav" id="mobile-demo">
-  <li class="profile"><img class="avatar-photo" src="https://www.petmd.com/sites/default/files/petmd-kitten-development.jpg"></li>
-  <li class="profile profile-name">Gatinho lindinho</li>
-  <li class="profile">gatinholindinho@id.uff.br</li>
-  <li class="divider"></li>
-  <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
-  <li><a href="/perfil"><i class="material-icons left">face</i>Perfil</a></li>
-  <li><a href="/meus-produtos"><i class="material-icons left">attach_money</i>Meus Produtos</a></li>
+  <li><a href="?orderBy=valor">Menor Preço</a></li>
+  <li><a href="?orderBy=-valor">Maior Preço</a></li>
 </ul>
 
+Campus:
+<form action="/" method="GET"><label>
+    <input type="checkbox" class="filled-in" name="CAMGragoatá" />
+    <span>Gragoatá</span>
+  </label>
+    <label>
+    <input type="checkbox" class="filled-in" name="CAMPraia Vermelha" />
+    <span>Praia Vermelha</span>
+  </label>
+    <label>
+    <input type="checkbox" class="filled-in" name="CAMValonguinho" />
+    <span>Valonguinho</span>
+  </label>
+    <label>
+    <input type="checkbox" class="filled-in" name="CAMIACS" />
+    <span>IACS</span>
+  </label>
+  <br>Horário:
+  <label>
+    <input type="checkbox" class="filled-in" name="TURManhã" />
+    <span>Manhã</span>
+  </label>
+   <label>
+    <input type="checkbox" class="filled-in" name="TURTarde" />
+    <span>Tarde</span>
+  </label>
+ <label>
+    <input type="checkbox" class="filled-in" name="TURNoite" />
+    <span>Noite</span>
+  </label>
+  <input type="submit" class="btn waves-effect waves-light center-align btn-login" name="action" value="Filtrar por campus e horário">
+</form>
+
+  {{#if produtos}}
   <div class="row">
+    {{#each produtos}}
     <div class="col s6 m6">
       <div class="card small">
         <div class="card-image">
-          <img class="imagem" src="https://www.petmd.com/sites/default/files/petmd-kitten-development.jpg">
-          <span class="card-title">R$10,00</span>
+          <img class="imagem" src="{{url}}">
+          <span class="card-title">R${{valor}}</span>
         </div>
         <div class="card-content">
-          <a href="#">Gatinho fofinho</a>
-          <a href="#">Vendido por: @mione</a>
+          <a href="#">{{nome}}</a>
+          <a href="#">{{descricao}}</a>
+          <a href="#">Vendido por: {{userName}}</a>
+          <a href="/comprar-produto?id={{_id}}&emailVendedor={{userEmail}}">Ver mais </a>
         </div>
       </div>
     </div>
-    <div class="col s6 m6">
-      <div class="card small">
-        <div class="card-image">
-          <img class="imagem" src="https://www.petmd.com/sites/default/files/petmd-kitten-development.jpg">
-          <span class="card-title">R$10,00</span>
-        </div>
-        <div class="card-content">
-          <a href="#">Gatinho fofinho</a>
-          <a href="#">Vendido por: @mione</a>
-        </div>
-      </div>
-    </div>
+    {{/each}}
   </div>
+{{else}}
+<h6 class="text-center">Não existem produtos a venda :( <br></h4>
+{{/if}}

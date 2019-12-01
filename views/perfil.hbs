@@ -1,0 +1,43 @@
+<form action="/perfil" method="POST" id="form-login">
+  <label for="nome">Nome:</label>
+  <input type="text" name="nome" id="nome" value="{{usuario.nome}}" disabled>
+  <label for="descricao">Email:</label>
+  <input type="text" name="email" id="email" value="{{usuario.email}}" disabled>
+  <p>Atualmente, você está vendendo seus produtos nos campus {{usuario.campus}}</p>
+  <p>E nos turnos {{usuario.turnos}}</p>
+  <label for="campus">Campus onde você vai vender seus produtos:</label>
+  <p><label>
+    <input type="checkbox" class="filled-in" name="CAMGragoatá" />
+    <span>Gragoatá</span>
+  </label></p>
+    <p><label>
+    <input type="checkbox" class="filled-in" name="CAMPraia Vermelha" />
+    <span>Praia Vermelha</span>
+  </label></p>
+    <p><label>
+    <input type="checkbox" class="filled-in" name="CAMValonguinho" />
+    <span>Valonguinho</span>
+  </label></p>
+    <p><label>
+    <input type="checkbox" class="filled-in" name="CAMIACS" />
+    <span>IACS</span>
+  </label></p>
+  <label for="turno">Turno que você vai estar vendendo:</label>
+  <p><label>
+    <input type="checkbox" class="filled-in" name="TURManhã" />
+    <span>Manhã</span>
+  </label></p>
+   <p><label>
+    <input type="checkbox" class="filled-in" name="TURTarde" />
+    <span>Tarde</span>
+  </label></p>
+ <p><label>
+    <input type="checkbox" class="filled-in" name="TURNoite" />
+    <span>Noite</span>
+  </label></p>
+
+  <input type="hidden" name="idUsuario" value="{{usuario._id}}">        
+  <div class="card-action right-align signup-signin-action">
+      <input type="submit" class="btn waves-effect waves-light center-align btn-login" name="action" value="Salvar">
+  </div>
+</form>

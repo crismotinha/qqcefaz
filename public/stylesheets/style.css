@@ -1,15 +1,103 @@
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* GLOBAL STYLE */
+* {
+  font-family: "Questrial", "Helvetica", "Lucida Grande", sans-serif;
+  font-weight: 500;
 }
 
-a {
-  color: #00B7FF;
+:root {
+  --primary-color: #3D155F;
+  --secondary-color: #01A39D;
+  --warning-color: #FE3961;
+  --font-raleway: "Raleway";
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background-color: #fafafa;
+}
+
+.error-msg {
+  color: #fafafa;
+  padding-top: 70px;
+}
+
+.error-content {
+  display: flex;
+  align-items: center;
+}
+
+.error-text {
+  padding-left: 89px;
+}
+.error-text h1 {
+  font-weight: 900;
+}
+
+.error-text h2 {
+  font-size: 30px;
+  text-transform: uppercase;
+}
+
+.error-stack {
+  margin-top: 30px;
+  font-size: 9px;
+  background: #474747;
+  border-radius: 5px;
+  padding: 3px 5px;
+}
+
+@media screen and (max-width: 600px) {
+  #error-stack {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
+  }
+}
+
+/* SIDEBAR */
+nav {
+  background: var(--primary-color);
+}
+
+.qqcefaz-nav-title {
+  font-weight: 800;
+  text-shadow: black 1cm;
+}
+
+.avatar-photo {
+  margin-top: 5%;
+  object-fit: cover;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+.profile {
+  padding-left: 5%;
+  line-height: 30px !important;
+}
+
+.profile-name {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.orderby {
+  margin-right: 18px;
 }
 
 .dropdown-content {
   left: auto !important;
   right: 0px !important;
   width: auto !important;
+  color: var(--secondary-color);
 }
 
 .dropdown-title {
@@ -18,29 +106,53 @@ a {
   font-size: 18px;
 }
 
-.imagem {
+/* HOME PAGE */
+
+.home-img-card {
   height: 45vw !important;
   object-fit: cover !important;
 }
 
+.home-card-title {
+  background-color: var(--secondary-color);
+  border-radius: 15%;
+  padding: 3px 8px 3px 8px !important;
+  margin: 8px !important;
+  font-size: 16px !important;
+}
+
 .card-content a {
-  font-size: larger;
-  padding-bottom: 10%;
   display: inline-block;
 }
 
-.avatar-photo {
-  margin-top: 5%;
-  object-fit: cover;
-  border-radius:50%;
-  width: 150px;
-  height: 150px;
+.home-title-product {
+  font-weight: 700;
+  font-family: var(--font-raleway);
 }
-.profile {
-  padding-left: 5%;
-  line-height: 30px !important;
+
+.home-subtitle-product a {
+  color: var(--secondary-color);
 }
-.profile-name {
-  font-size: larger;
-  font-weight: bold;
+
+/* LOGIN E CADASTRO */
+.qqcefaz-login {
+  margin-top: 100px;
+}
+
+.btn-action-signup-signin {
+  background-color: #ffffff;
+  color: var(--primary-color) !important;
+}
+
+.signup-signin-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.signup-signin-action input {
+  color: white;
+}
+
+.card-link {
+  display:block;
 }

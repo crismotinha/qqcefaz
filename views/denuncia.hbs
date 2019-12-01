@@ -1,0 +1,59 @@
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+  <li class="dropdown-title">Ordenar por</li>
+  <li class="divider"></li>
+  <li><a href="?orderBy=valor">Menor Preço</a></li>
+  <li><a href="?orderBy=-valor">Maior Preço</a></li>
+</ul>
+<nav>
+  <div class="nav-wrapper">
+    <a href="#!" class="brand-logo">qqcefaz?</a>
+    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <!-- Dropdown Trigger -->
+      <a class="dropdown-trigger" href="#!" data-target="dropdown1" data-alignment="right"><i class="material-icons right">import_export</i></a>
+  </div>
+</nav>
+<ul class="sidenav" id="mobile-demo">
+  <li class="profile"><img class="avatar-photo" src="https://www.petmd.com/sites/default/files/petmd-kitten-development.jpg"></li>
+  <li class="profile profile-name">{{usuario.nome}}</li>
+  <li class="profile">{{usuario.email}}</li>
+  <li class="divider"></li>
+  <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+  <li><a href="/perfil"><i class="material-icons left">face</i>Perfil</a></li>
+  <li><a href="/meus-produtos"><i class="material-icons left">attach_money</i>Meus Produtos</a></li>
+</ul>
+<h5>Você clicou para denunciar o produto abaixo:</h5>
+<form action="/denuncia" method="POST">
+<div class="row">
+  <div class="card s12">
+    <div class="card-image">
+      <img class="imagem" src="{{produto.url}}">
+      <span class="card-title">R${{produto.valor}}</span>
+    </div>
+    <div class="card-content">
+      <p>{{produto.nome}}</p>
+      <p>{{produto.descricao}}</p>
+      <p>Vendido por: {{produto.userName}}</p>
+    </div>
+  </div>
+</div>
+<h5>Por favor, selecione o(s) motivo(s) da denúncia:</h5>
+<p><label>
+    <input type="checkbox" class="filled-in" name="Indecente" />
+    <span>Produto para maiores de idade</span>
+  </label></p>
+<p><label>
+    <input type="checkbox" class="filled-in" name="Proibido" />
+    <span>Produto proibido de comercializar no Brasil</span>
+  </label></p>
+<p><label>
+    <input type="checkbox" class="filled-in" name="Ofensivo" />
+    <span>Produto ofensivo</span>
+  </label></p>
+ <input type="hidden" name="idProduto" value="{{produto._id}}">
+
+ Você será redirecionado para HOME assim que a denúncia for enviada com sucesso.        
+ <div class="card-action right-align signup-signin-action">
+      <input type="submit" class="btn waves-effect waves-light center-align btn-login" value="Enviar">
+  </div>
+</form>

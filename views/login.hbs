@@ -1,0 +1,38 @@
+<body style="background-color: var(--primary-color);">
+    <div class="valign-wrapper row login-box qqcefaz-login">
+        <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
+            <form action="/usuario" method="POST" id="form-login">
+                <div class="card-content">
+                    <span class="card-title">Olá!</span>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <label for="nome">Nome:</label>
+                            <input type="text" name="nome" id="nome" placeholder="Só preencha em caso de cadastro"
+                                value="{{nome}}">
+                        </div>
+                        <div class="input-field col s12">
+                            <label for="email">E-mail:</label>
+                            <input type="email" name="email" id="email" class="validate" placeholder="E-mail"
+                                value="{{email}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-action right-align signup-signin-action">
+                    <input type="submit" class="btn waves-effect waves-light center-align btn-login" name="action" value="login">
+                </div>
+
+                Ao clicar no botão abaixo para se cadastrar você está concordando com os os seguintes termos:
+                <ul>
+                    <li>Você é uma pessoa que estuda ou trabalha na UFF (quaisquer campi)</li>
+                    <li>Você não irá vender nenhum produto de venda proibida em território nacional</li>
+                    <li>Você não irá vender itens que podem ofender outros usuários</li>
+                    <li>Você não irá vender itens de venda proibida para menores de 18 anos</li>
+                </ul>
+                Nós possuímos um botão de denuncia para cada item. Se você encontrar algum item que se enquadra nas condições acima, denuncie e nos ajude a manter um ambiente legal. Caso você seja denunciado, iremos analisar manualmente e tomar as devidas previdências (entrar em contato, excluir a conta ou denunciar na polícia com as informações de usuário anexas).
+                <div class="card-action right-align signup-signin-action">
+                 <input type="submit" class="btn waves-effect waves-light center-align btn-login" name="action" value="cadastro">
+             </div>
+            </form>
+        </div>
+    </div>
+</body>
