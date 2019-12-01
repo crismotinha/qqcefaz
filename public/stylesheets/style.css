@@ -5,6 +5,12 @@
   /* font-weight: 500; */
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+
+}
+
 :root {
   --primary-color: #3D155F;
   --secondary-color: #01A39D;
@@ -19,6 +25,15 @@ html {
 body {
   height: 100%;
   background-color: #fafafa;
+}
+
+.flex-space-between-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-space-between-center input {
+  color: #fafafa;
 }
 
 /* SIDEBAR */
@@ -44,8 +59,11 @@ nav {
   font-weight: bold;
 }
 
-.orderby {
-  margin-right: 18px;
+.orderby a .material-icons {
+  position: relative;
+  z-index: 1;
+  height: 56px;
+  margin: 0 18px !important;
 }
 
 .dropdown-content {
@@ -63,12 +81,47 @@ nav {
 
 /* HOME PAGE */
 
+.img-no-product-found {
+  display: flex;
+  justify-content: center;
+}
+
+.txt-no-product-found {
+  font-weight: 600;
+  text-align: center;
+  font-family: var(--font-title);
+}
+
+/** filters **/
+.filters-form {
+  margin-top: 10px;
+}
+
+.filters-form-submit {
+  text-align-last: center;
+}
+
+.filters-form input[type="submit"] {
+  color: #fafafa;
+}
+
+.filters-flex-space-between {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.filters-flex-space-between div {
+  display: grid;
+  margin-bottom: 5px;
+}
+
+
 .home-img-card {
-  height: 50vh !important;
+  /* height: 50vh !important; */
   object-fit: cover !important;
 }
 
-.home-card-title {
+.value-card-title {
   background-color: var(--secondary-color);
   border-radius: 15%;
   padding: 3px 8px 3px 8px !important;
@@ -85,30 +138,20 @@ nav {
   font-family: var(--font-title);
   font-size: 1.1em;
 }
-/* decidir cor dos links - cor azul ou secondary? */
-.home-subtitle-product a { 
-  color: var(--secondary-color);
-}
 
 /* LOGIN E CADASTRO */
 .qqcefaz-login {
   margin-top: 100px;
 }
 
-.btn-action-signup-signin {
-  background-color: #ffffff;
-  color: var(--primary-color) !important;
+/* PRODUTO */
+
+.warning-action {
+  color: var(--warning-color);
 }
 
-.signup-signin-action {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.signup-signin-action input {
-  color: white;
-}
-
-.card-link {
-  display:block;
+.denuncia-title {
+  font-family: var(--font-title);
+  text-align: center;
+  font-weight: 600;
 }
