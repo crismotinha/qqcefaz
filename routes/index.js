@@ -49,7 +49,8 @@ router.get('/deletar-produto', (req, res)=> {
 router.get('/comprar-produto', (req, res)=> {
     const id = req.query.id;
     const emailVendedor = req.query.emailVendedor;
-    UsuarioController.getProdutoAllInfos(req, res, id, emailVendedor);
+    const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
+    UsuarioController.getProdutoAllInfos(req, res, id, emailVendedor, user);
 });
 
 router.get('/denuncia', (req, res)=> {

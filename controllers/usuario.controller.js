@@ -180,9 +180,10 @@ module.exports = {
       });
   },
   // Visualizando um produto específico e denuncia
-  getProdutoAllInfos: (req, res, idProduto, emailVendedor) => {
+  getProdutoAllInfos: (req, res, idProduto, emailVendedor, usuario) => {
     Promise.all([Produto.findOne({_id: idProduto}), Usuario.findOne({email: emailVendedor})])
-    .then(([produto, usuario]) => res.render('produto', { title: 'qqcefaz', produto, usuario }))
+    .then(([produto, usuarioVendedor]) => 
+      res.render('produto', { title: 'qqcefaz', produto, usuarioVendedor, usuario }))
     .catch(err => {
         console.log(err);
         const erro = 'Aconteceu um erro. Tente novamente';
