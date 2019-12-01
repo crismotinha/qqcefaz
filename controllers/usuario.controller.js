@@ -273,7 +273,7 @@ module.exports = {
     .catch(err => {
           console.log(err);
           const erro = 'Aconteceu um erro. Tente novamente';
-          res.render('index', { title: 'qqcefaz', usuario, erro })
+          res.render('index', { title: 'qqcefaz', erro })
         })
   },
 

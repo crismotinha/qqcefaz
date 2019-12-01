@@ -43,15 +43,15 @@ Campus:
   <div class="row">
     {{#each produtos}}
     <div class="col s6 m6">
-      <div class="card small">
+      <div class="card small home-img-card">
         <div class="card-image">
           <img class="imagem" src="{{url}}">
-          <span class="card-title">R${{valor}}</span>
+          <span class="card-title home-card-title">R${{valor}}</span>
         </div>
         <div class="card-content">
-          <a href="#">{{nome}}</a>
-          <a href="#">{{descricao}}</a>
-          <a href="#">Vendido por: {{userName}}</a>
+          <p class="home-title-product">{{nome}}</p>
+          <p>{{descricao}}</p>
+          <p class="home-subtitle-product">Vendido por: <a href="#">{{userName}}</a></p>
           <a href="/comprar-produto?id={{_id}}&emailVendedor={{userEmail}}">Ver mais </a>
         </div>
       </div>
@@ -59,5 +59,5 @@ Campus:
     {{/each}}
   </div>
 {{else}}
-<h6 class="text-center">Não existem produtos a venda :( <br></h4>
+<h4 class="text-center">Não existem produtos a venda :( <br></h4>
 {{/if}}
