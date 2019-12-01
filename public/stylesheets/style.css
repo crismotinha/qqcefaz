@@ -164,3 +164,19 @@ nav {
   display: inline-block;
   vertical-align: middle;
 }
+
+.imagem-produto {
+  width: 90%;
+}
+
+.produto-title {
+  font-size: 1.5em;
+  font-family: var(--font-title);
+  font-weight: 600;
+}
+
+.info-vendedor {
+  border-top: 1px gray solid;
+  border-bottom: 1px gray solid;
+  margin-top: 10px;
+}
