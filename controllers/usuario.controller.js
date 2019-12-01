@@ -190,19 +190,17 @@ module.exports = {
         res.render('index', { title: 'qqcefaz', usuario, erro })
       });
   },
-  getProdutoDenuncia: (req, res, idProduto) => {
+  getProdutoDenuncia: (req, res, idProduto, usuario) => {
     Produto.findOne({_id: idProduto})
-    .then(produto => res.render('denuncia', {title: 'qqcefaz', produto}))
+    .then(produto => res.render('denuncia', {title: 'qqcefaz', produto, usuario}))
     .catch(err => {
         console.log(err);
         const erro = 'Aconteceu um erro. Tente novamente';
         res.render('index', { title: 'qqcefaz', usuario, erro })
       })
   },
-  postProdutoDenuncia: (req, res, email) => {
-    console.log(email, req.body);
+  postProdutoDenuncia: (req, res, email, usuario) => {
     const text = `Recebemos uma denúncia, feita pelo usuário ${email}. Seguem os detalhes: ${JSON.stringify(req.body)}`
-    console.log(text);
 
     transporter.sendMail(
       {
@@ -249,9 +247,9 @@ module.exports = {
           res.render('index', { title: 'qqcefaz', usuario, erro })
         });
   },  
-  getPerfil: (req, res, email) => {
+  getPerfil: (req, res, email, usuario) => {
     Usuario.findOne({email: email})
-    .then(usuario => res.render('perfil', { title: 'qqcefaz', usuario}))
+    .then(usuarioEncontrado => res.render('perfil', { title: 'qqcefaz', usuario: usuarioEncontrado}))
     .catch(err => {
           console.log(err);
           const erro = 'Aconteceu um erro. Tente novamente';
