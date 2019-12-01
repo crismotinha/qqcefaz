@@ -4,7 +4,7 @@ const UsuarioController = require('../controllers/usuario.controller');
 
 // Home
 router.get('/', function(req, res, next) {
-  const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
+  const user = {nome: req.cookies["nome"], email: req.cookies["email"], foto: req.cookies["foto"]};
   const query = req.query;
   UsuarioController.getAllProdutos(req, res, user, query);
 });
@@ -21,25 +21,25 @@ router.get('/usuario', (req, res)=> {
 // Gestão de produtos do usuário
 
 router.get('/meus-produtos', (req, res)=> {
-    const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
+    const user = {nome: req.cookies["nome"], email: req.cookies["email"], foto: req.cookies["foto"]};
     const orderBy = req.query.orderBy;
     UsuarioController.getProduto(req, res, user, orderBy);
 });
 
 router.get('/produto', (req, res)=> {
-    const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
+    const user = {nome: req.cookies["nome"], email: req.cookies["email"], foto: req.cookies["foto"]};
     const id = req.query.id;
     UsuarioController.getProdutoById(req, res, user, id);
 });
 
 router.post('/produto', (req, res)=> {
-    const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
+    const user = {nome: req.cookies["nome"], email: req.cookies["email"], foto: req.cookies["foto"]};
     const id = req.body.idProduto;
     UsuarioController.addOrEditProduto(req, res, user, id);
 });
 
 router.get('/deletar-produto', (req, res)=> {
-    const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
+    const user = {nome: req.cookies["nome"], email: req.cookies["email"], foto: req.cookies["foto"]};
     const id = req.query.id;
     UsuarioController.deleteProduto(req, res, user, id);
 });

@@ -2,12 +2,6 @@
 * {
   font-family: "Poppins", sans-serif;
   font-size: 0.98em;
-  /* font-weight: 500; */
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
 }
 
 :root {
@@ -24,6 +18,16 @@ html {
 body {
   height: 100%;
   background-color: #fafafa;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 .flex-space-between-center {
