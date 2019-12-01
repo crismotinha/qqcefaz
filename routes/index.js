@@ -49,16 +49,18 @@ router.get('/deletar-produto', (req, res)=> {
 router.get('/comprar-produto', (req, res)=> {
     const id = req.query.id;
     const emailVendedor = req.query.emailVendedor;
-    UsuarioController.getProdutoAllInfos(req, res, id, emailVendedor);
+    const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
+    UsuarioController.getProdutoAllInfos(req, res, id, emailVendedor, user);
 });
 
 router.get('/denuncia', (req, res)=> {
-    const email = req.cookies["email"];
+    const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
     const id = req.query.id;
-    UsuarioController.getProdutoDenuncia(req, res, id);
+    UsuarioController.getProdutoDenuncia(req, res, id, user);
 });
 
 router.post('/denuncia', (req, res)=> {
+    const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
     const email = req.cookies["email"];
     UsuarioController.postProdutoDenuncia(req, res, email);
 });
@@ -79,8 +81,8 @@ router.post('/perfil', (req, res) => {
 })
 
 router.get('/perfil', (req, res)=> {
-    const email = req.cookies["email"];
-    UsuarioController.getPerfil(req, res, email);
+    const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
+    UsuarioController.getPerfil(req, res, email, user);
 });
 
 module.exports = router;
