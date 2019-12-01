@@ -1,4 +1,19 @@
+<h5 class="page-main-title">Meus produtos</h5>
 {{#if produtos}}
+<ul class="collection">
+  {{#each produtos}}
+  <li class="collection-item avatar">
+    <img src="{{url}}" alt="" class="my-products-img">
+    <span class="title">{{nome}}</span>
+    <p>{{descricao}}, 
+      R$ {{valor}}
+    </p>
+    <a href="/produto?id={{_id}}" class="edit-action"><i class="small material-icons">edit</i></a>
+    <a href="/deletar-produto?id={{_id}}" class="warning-action"><i class="small material-icons">delete</i></a>
+  </li>
+
+  {{/each}}
+  {{!-- 
 <div class="row">
   {{#each produtos}}
   <div class="col s6 m6">
@@ -11,24 +26,25 @@
         <p class="home-title-product">{{nome}}</p>
         <p>{{descricao}}</p>
       </div>
-      <div class="card-actions">
-        <a href="/produto?id={{_id}}"><i class="small material-icons">edit</i></a>
+      <div class="card-actions center">
+        <a href="/produto?id={{_id}}" class="edit-action"><i class="small material-icons">edit</i></a>
         <a href="/deletar-produto?id={{_id}}" class="warning-action"><i class="small material-icons">delete</i></a>
       </div>
     </div>
   </div>
   {{/each}}
-</div>
-{{else}}
-<div class="img-no-product-found">
-  <img src="../imgs/nocartIcon.png">
-</div>
-<p class="txt-no-product-found">Não existem produtos a venda. Que tal começar a vender algo? <br> Clique no botão + para
-  adicionar um produto.</p>
-{{/if}}
+</div> --}}
+  {{else}}
+  <div class="img-no-product-found">
+    <img src="../imgs/nocartIcon.png">
+  </div>
+  <p class="txt-no-product-found">Não existem produtos a venda. Que tal começar a vender algo? <br> Clique no botão +
+    para
+    adicionar um produto.</p>
+  {{/if}}
 
-<div class="fixed-action-btn">
-  <a class="btn-floating btn-large" href="/produto">
-    <i class="large material-icons">add</i>
-  </a>
-</div>
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large" href="/produto">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>
