@@ -82,7 +82,7 @@ router.post('/perfil', (req, res) => {
 
 router.get('/perfil', (req, res)=> {
     const user = {nome: req.cookies["nome"], email: req.cookies["email"]};
-    UsuarioController.getPerfil(req, res, email, user);
+    UsuarioController.getPerfil(req, res, user.email, user);
 });
 
 module.exports = router;
