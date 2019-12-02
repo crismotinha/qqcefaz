@@ -13,7 +13,6 @@ var app = express();
 hbs.registerPartials(path.join(__dirname + '/views/partials'));
 
 hbs.registerHelper('hasElement', function(array, element, options) {
-  console.log('ue', array, element, array.includes(element))
     return array.includes(element) ? options.fn(this) : options.inverse(this);
 });
 

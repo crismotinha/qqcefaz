@@ -264,8 +264,6 @@ module.exports = {
     const campus = getCampus(req.body);
     const turnos = getTurnos(req.body);
 
-    console.log(req.body)
-
     Usuario.findById(req.body.idUsuario)
     .then(usuario => {
       usuario.foto = req.body.foto;
@@ -274,7 +272,10 @@ module.exports = {
 
       return usuario.save()
     })
-    .then(usuario => res.render('perfil', { title: 'qqcefaz', usuario}))
+    .then(usuario => {
+      res.cookie('foto', usuario.foto)
+      res.render('perfil', { title: 'qqcefaz', usuario})
+    })
     .catch(err => {
           console.log(err);
           const erro = 'Aconteceu um erro. Tente novamente';
