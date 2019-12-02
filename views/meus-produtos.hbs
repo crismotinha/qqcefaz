@@ -1,28 +1,28 @@
+<h5 class="page-main-title">Meus produtos</h5>
 {{#if produtos}}
-  <div class="row">
-    {{#each produtos}}
-    <div class="col s6 m6">
-      <div class="card small">
-        <div class="card-image">
-          <img class="imagem" src="{{url}}">
-          <span class="card-title">R${{valor}}</span>
-        </div>
-        <div class="card-content">
-          <a href="#">{{nome}}</a>
-          <a href="#">{{descricao}}</a>
-          <a href="/produto?id={{_id}}"><i class="small material-icons">edit</i></a>
-          <a href="/deletar-produto?id={{_id}}"><i class="small material-icons">delete</i></a>
-        </div>
-      </div>
-    </div>
-    {{/each}}
+<ul class="collection">
+  {{#each produtos}}
+  <li class="collection-item avatar">
+    <img src="{{url}}" alt="" class="my-products-img">
+    <span class="title">{{nome}}</span>
+    <p>{{descricao}},
+      R$ {{valor}}
+    </p>
+    <a href="/produto?id={{_id}}" class="edit-action"><i class="small material-icons">edit</i></a>
+    <a href="/deletar-produto?id={{_id}}" class="warning-action"><i class="small material-icons">delete</i></a>
+  </li>
+  {{/each}}
+  {{else}}
+  <div class="img-no-product-found">
+    <img src="../imgs/nocartIcon.png">
   </div>
-{{else}}
-<h6 class="text-center">Você não tem nenhum produto :( <br></h4>
-{{/if}}
+  <p class="txt-no-product-found">Não existem produtos a venda. Que tal começar a vender algo? <br> Clique no botão +
+    para
+    adicionar um produto.</p>
+  {{/if}}
 
-<div class="fixed-action-btn">
-  <a class="btn-floating btn-large red" href="/produto">
-    <i class="large material-icons">add</i>
-  </a>
-</div>
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large" href="/produto">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>

@@ -1,16 +1,19 @@
 <div class="row">
-  <div class="card s12">
-    <div class="card-image">
-      <img class="imagem" src="{{produto.url}}">
-      <span class="card-title">R${{produto.valor}}</span>
-    </div>
-    <div class="card-content">
-      <p>{{produto.nome}}</p>
-      <p>{{produto.descricao}}</p>
-      <p>Vendido por: {{produto.userName}}</p>
-      <p>Campus: {{usuarioVendedor.campus}}</p>
-      <p>Horário: {{usuarioVendedor.turnos}}</p>
-    </div>
+  <div>
+    <img class="imagem-produto" src="{{produto.url}}">
   </div>
-  <a href="/denuncia?id={{produto._id}}"><i class="material-icons left">thumb_down</i>Denunciar produto</a>
+  <div>
+    <p class="produto-title">{{produto.nome}}</p>
+    <p>{{produto.descricao}}</p>
+    <p>Preço: R$ {{produto.valor}}</p>
+  </div>
+  <div class="info-vendedor">
+    <h6><b>Informações do vendedor</b></h6>
+    <p class="">Vendido por {{produto.userName}}</p>
+    <p>Campus: {{usuarioVendedor.campus}}</p>
+    <p>Horário: {{usuarioVendedor.turnos}}</p>
+  </div>
+</div>
+<a href="/denuncia?id={{produto._id}}" class="warning-action"><i class="material-icons left">thumb_down</i>Denunciar
+  produto</a>
 </div>

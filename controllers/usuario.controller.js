@@ -30,6 +30,7 @@ const Produto = mongoose.model(('Produto'), new mongoose.Schema({
 const Usuario = mongoose.model(('Usuario'), new mongoose.Schema({
   nome: {type: String, required: true},
   email: {type: String, unique : true, required: true},
+  foto: String,
   campus: [],
   turnos: [],
 }));
@@ -57,7 +58,6 @@ module.exports = {
     const filterCampus = getCampus(query);
     const filterTurnos = getTurnos(query);
     const sort = query.orderBy ? query.orderBy : {};
-    const erro = "ue"
 
     if (filterCampus.length > 0 || filterTurnos.length > 0) {
       const filter = {};
@@ -102,9 +102,10 @@ module.exports = {
     Usuario.findOne({email: req.body.email})
     .then((usuario) => {
       if(usuario) {
-        res.cookie('nome', usuario.nome)
-        res.cookie('email', usuario.email)
-        res.redirect("/")
+        res.cookie('nome', usuario.nome);
+        res.cookie('email', usuario.email);
+        res.cookie('foto', usuario.foto);
+        res.redirect("/");
       }
       else {
         return Promise.reject('Usuário não existe');
@@ -119,7 +120,8 @@ module.exports = {
   logout: (req, res) => {   
     res.clearCookie('nome');
     res.clearCookie('email');
-    res.redirect("/")
+    res.clearCookie('foto');
+    res.redirect("/");
   },
   // Gestão de produtos do usuário
   getProdutoById: (req, res, usuario, idProduto) => {
@@ -231,6 +233,7 @@ module.exports = {
         const usuario = new Usuario({
           nome: req.body.nome,
           email: req.body.email,
+          foto: 'https://www.petmd.com/sites/default/files/petmd-kitten-development.jpg'
         });
 
         return usuario.save()
@@ -239,6 +242,7 @@ module.exports = {
     .then((usuario) => {
       res.cookie('nome', usuario.nome)
       res.cookie('email', usuario.email)
+      res.cookie('foto', usuario.foto)
       res.redirect("/")
     })
     .catch(err => {
@@ -263,6 +267,7 @@ module.exports = {
     Usuario.findById(req.body.idUsuario)
     .then(usuario => {
       usuario.nome= req.body.nome;
+      usuario.foto = req.body.foto;
       usuario.campus= campus;
       usuario.turnos= turnos;
 
@@ -272,7 +277,7 @@ module.exports = {
     .catch(err => {
           console.log(err);
           const erro = 'Aconteceu um erro. Tente novamente';
-          res.render('index', { title: 'qqcefaz', usuario, erro })
+          res.render('index', { title: 'qqcefaz', erro })
         })
   },
 

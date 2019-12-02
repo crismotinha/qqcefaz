@@ -1,15 +1,15 @@
-<h5>Você clicou para denunciar o produto abaixo:</h5>
+<h5 class="page-main-title">Você deseja denunciar o produto abaixo:</h5>
 <form action="/denuncia" method="POST">
 <div class="row">
   <div class="card s12">
     <div class="card-image">
       <img class="imagem" src="{{produto.url}}">
-      <span class="card-title">R${{produto.valor}}</span>
+      <span class="card-title value-card-title">R${{produto.valor}}</span>
     </div>
     <div class="card-content">
       <p>{{produto.nome}}</p>
       <p>{{produto.descricao}}</p>
-      <p>Vendido por: {{produto.userName}}</p>
+      <p>Vendido por {{produto.userName}}</p>
     </div>
   </div>
 </div>
@@ -29,7 +29,7 @@
  <input type="hidden" name="idProduto" value="{{produto._id}}">
 
  Você será redirecionado para HOME assim que a denúncia for enviada com sucesso.        
- <div class="card-action right-align signup-signin-action">
+ <div class="card-action right-align flex-space-between-center">
       <input type="submit" class="btn waves-effect waves-light center-align btn-login" value="Enviar">
   </div>
 </form>
