@@ -4,37 +4,68 @@
   <label for="descricao">Email:</label>
   <input type="text" name="email" id="email" value="{{usuario.email}}" disabled>
   <label for="foto">URL da foto:</label>
-  <input type="text" name"foto" id="foto" value="{{usuario.foto}}">
+  <input type="text" name="foto" id="foto" value="{{usuario.foto}}">
   <p>Atualmente, você está vendendo seus produtos nos campus {{usuario.campus}}</p>
   <p>E nos turnos {{usuario.turnos}}</p>
   <label for="campus">Campus onde você vai vender seus produtos:</label>
   <p><label>
-      <input type="checkbox" class="filled-in" name="CAMGragoatá" />
+      {{#hasElement usuario.campus 'Gragoatá'}}
+      <input type="checkbox" class="filled-in" name="CAMGragoatá" 
+      checked
+      />
+      {{else}}
+      <input type="checkbox" class="filled-in" name="CAMGragoatá"       
+      />
+      {{/hasElement}}
       <span>Gragoatá</span>
     </label></p>
   <p><label>
+    {{#hasElement usuario.campus 'Praia Vermelha'}}
+      <input type="checkbox" class="filled-in" name="CAMPraia Vermelha" checked />
+      {{else}}
       <input type="checkbox" class="filled-in" name="CAMPraia Vermelha" />
+      {{/hasElement}}
       <span>Praia Vermelha</span>
     </label></p>
   <p><label>
+    {{#hasElement usuario.campus 'Valonguinho'}}
+      <input type="checkbox" class="filled-in" name="CAMValonguinho" checked />
+      {{else}}
       <input type="checkbox" class="filled-in" name="CAMValonguinho" />
+      {{/hasElement}}
       <span>Valonguinho</span>
     </label></p>
   <p><label>
+    {{#hasElement usuario.campus 'IACS'}}
+      <input type="checkbox" class="filled-in" name="CAMIACS" checked/>
+      {{else}}
       <input type="checkbox" class="filled-in" name="CAMIACS" />
+      {{/hasElement}}
       <span>IACS</span>
     </label></p>
   <label for="turno">Turno que você vai estar vendendo:</label>
   <p><label>
+    {{#hasElement usuario.turnos 'Manhã'}}
+      <input type="checkbox" class="filled-in" name="TURManhã" checked />
+      {{else}}
       <input type="checkbox" class="filled-in" name="TURManhã" />
+      {{/hasElement}}
       <span>Manhã</span>
     </label></p>
   <p><label>
+    {{#hasElement usuario.turnos 'Tarde'}}
+      <input type="checkbox" class="filled-in" name="TURTarde" checked />
+      {{else}}
       <input type="checkbox" class="filled-in" name="TURTarde" />
+      {{/hasElement}}
       <span>Tarde</span>
     </label></p>
   <p><label>
+    {{#hasElement usuario.turnos 'Noite'}}
+      <input type="checkbox" class="filled-in" name="TURNoite" checked />
+      {{else}}
       <input type="checkbox" class="filled-in" name="TURNoite" />
+      {{/hasElement}}
       <span>Noite</span>
     </label></p>
 

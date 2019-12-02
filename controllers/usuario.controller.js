@@ -264,6 +264,8 @@ module.exports = {
     const campus = getCampus(req.body);
     const turnos = getTurnos(req.body);
 
+    console.log(req.body)
+
     Usuario.findById(req.body.idUsuario)
     .then(usuario => {
       usuario.foto = req.body.foto;
