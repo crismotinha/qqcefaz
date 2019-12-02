@@ -266,7 +266,6 @@ module.exports = {
 
     Usuario.findById(req.body.idUsuario)
     .then(usuario => {
-      usuario.nome= req.body.nome;
       usuario.foto = req.body.foto;
       usuario.campus= campus;
       usuario.turnos= turnos;
