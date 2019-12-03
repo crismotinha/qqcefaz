@@ -272,7 +272,10 @@ module.exports = {
 
       return usuario.save()
     })
-    .then(usuario => res.render('perfil', { title: 'qqcefaz', usuario}))
+    .then(usuario => {
+      res.cookie('foto', usuario.foto)
+      res.render('perfil', { title: 'qqcefaz', usuario})
+    })
     .catch(err => {
           console.log(err);
           const erro = 'Aconteceu um erro. Tente novamente';
