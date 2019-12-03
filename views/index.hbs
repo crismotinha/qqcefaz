@@ -29,7 +29,7 @@
         </label>
       </div>
       <div>
-        <span>Horário:</span>
+        <span>Turno:</span>
         <label>
           <input type="checkbox" class="filled-in" name="TURManhã" />
           <span>Manhã</span>
@@ -55,10 +55,10 @@
 <div class="row">
   {{#each produtos}}
   <a href="/comprar-produto?id={{_id}}&emailVendedor={{userEmail}}">
-  <div class="col s6 m6">
+  <div class="col s6 m6" id="home-card-produto">
     <div class="card small home-img-card">
       <div class="card-image">
-        <img class="imagem" src="{{url}}">
+        <img class="home-card-img" src="{{url}}">
         <span class="card-title value-card-title">R${{valor}}</span>
       </div>
       <div class="card-content">
