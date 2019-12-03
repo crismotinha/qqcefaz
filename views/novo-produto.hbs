@@ -1,14 +1,40 @@
-<form action="/produto" method="POST" id="form-login">
-  <label for="nome">Nome:</label>
-  <input type="text" name="nome" id="nome" value="{{produto.nome}}">
-  <label for="descricao">Descrição:</label>
-  <input type="text" name="descricao" id="descricao" value="{{produto.descricao}}">
-  <label for="valor">Valor:</label>
-  <input type="number" name="valor" id="valor" value="{{produto.valor}}">
-  <label for="url">URL:</label>
-  <input type="text" name="url" id="url" value="{{produto.url}}">
-  <input type="hidden" name="idProduto", value="{{produto._id}}">        
-  <div class="card-action right-align flex-space-between-center">
-      <input type="submit" class="btn waves-effect waves-light center-align btn-login" name="action" value="Salvar">
+<form action="/produto" method="POST" id="form-login" class="col s12">
+  <div class="row">
+    <div class="input-field col s12">
+      <label for="nome">Nome</label>
+      <input type="text" name="nome" id="nome" value="{{produto.nome}}">
+      <span class="helper-text" data-error="wrong" data-success="right">Máximo de 30 caracteres</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <label for="descricao">Descrição:</label>
+      <input type="text" name="descricao" id="descricao" value="{{produto.descricao}}">
+      <span class="helper-text" data-error="wrong" data-success="right">Não precisa ser longo! Descreva seu produto em
+        uma frase.</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <label for="valor">Valor</label>
+      <input type="number" name="valor" id="valor" value="{{produto.valor}}">
+      <span class="helper-text" data-error="wrong" data-success="right">Apenas números - exemplo, 5</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <label for="url">URL da foto</label>
+      <input type="text" name="url" id="url" value="{{produto.url}}">
+      <span class="helper-text" data-error="wrong" data-success="right">Dê preferência por fotos em modo paisagem,
+        ficarão
+        mais bonitas no feed</span>
+    </div>
+  </div>
+  <input type="hidden" name="idProduto" , value="{{produto._id}}">
+
+  <div class="center-align save-button">
+    <input type="submit" class="btn waves-effect waves-light btn-login" style="color: #fafafa" name="action" value="Salvar">
   </div>
 </form>

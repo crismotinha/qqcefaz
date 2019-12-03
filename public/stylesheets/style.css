@@ -35,9 +35,11 @@ a {
   justify-content: space-between;
   align-items: center;
 }
-.flex-space-between-center input {
+.flex-space-between-center input,
+.save-button input {
   color: #fafafa;
 }
+
 
 /* SIDEBAR */
 nav {
@@ -83,6 +85,15 @@ nav {
 }
 
 /* HOME PAGE */
+#home-card-produto .card-content {
+  max-height: 100% !important;
+}
+
+.home-card-img {
+  max-width: 100%;
+  height: auto;
+  background: no-repeat center;
+}
 
 .img-no-product-found {
   display: flex;
@@ -116,9 +127,6 @@ nav {
 .filters-flex-space-between div {
   display: grid;
   margin-bottom: 5px;
-}
-
-.home-card {
 }
 
 .value-card-title {
