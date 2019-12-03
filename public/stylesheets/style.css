@@ -46,6 +46,11 @@ nav {
   background: var(--primary-color);
 }
 
+.brand-logo {
+  left: 50% !important;
+  -webkit-transform: translateX(-50%) !important;
+  transform: translateX(-50%) !important;
+}
 .avatar-photo {
   margin-top: 5%;
   object-fit: cover;
