@@ -6,58 +6,74 @@
   <li><a href="?orderBy=-valor">Maior Preço</a></li>
 </ul>
 
-Campus:
-<form action="/" method="GET"><label>
-    <input type="checkbox" class="filled-in" name="CAMGragoatá" />
-    <span>Gragoatá</span>
-  </label>
-    <label>
-    <input type="checkbox" class="filled-in" name="CAMPraia Vermelha" />
-    <span>Praia Vermelha</span>
-  </label>
-    <label>
-    <input type="checkbox" class="filled-in" name="CAMValonguinho" />
-    <span>Valonguinho</span>
-  </label>
-    <label>
-    <input type="checkbox" class="filled-in" name="CAMIACS" />
-    <span>IACS</span>
-  </label>
-  <br>Horário:
-  <label>
-    <input type="checkbox" class="filled-in" name="TURManhã" />
-    <span>Manhã</span>
-  </label>
-   <label>
-    <input type="checkbox" class="filled-in" name="TURTarde" />
-    <span>Tarde</span>
-  </label>
- <label>
-    <input type="checkbox" class="filled-in" name="TURNoite" />
-    <span>Noite</span>
-  </label>
-  <input type="submit" class="btn waves-effect waves-light center-align btn-login" name="action" value="Filtrar por campus e horário">
-</form>
-
-  {{#if produtos}}
-  <div class="row">
-    {{#each produtos}}
-    <div class="col s6 m6">
-      <div class="card small">
-        <div class="card-image">
-          <img class="imagem" src="{{url}}">
-          <span class="card-title">R${{valor}}</span>
-        </div>
-        <div class="card-content">
-          <a href="#">{{nome}}</a>
-          <a href="#">{{descricao}}</a>
-          <a href="#">Vendido por: {{userName}}</a>
-          <a href="/comprar-produto?id={{_id}}&emailVendedor={{userEmail}}">Ver mais </a>
-        </div>
+<div class="filters-form">
+  <form action="/" method="GET">
+    <div class="filters-flex-space-between">
+      <div>
+        <span>Campus:</span>
+        <label>
+          <input type="checkbox" class="filled-in" name="CAMGragoatá" />
+          <span>Gragoatá</span>
+        </label>
+        <label>
+          <input type="checkbox" class="filled-in" name="CAMPraia Vermelha" />
+          <span>Praia Vermelha</span>
+        </label>
+        <label>
+          <input type="checkbox" class="filled-in" name="CAMValonguinho" />
+          <span>Valonguinho</span>
+        </label>
+        <label>
+          <input type="checkbox" class="filled-in" name="CAMIACS" />
+          <span>IACS</span>
+        </label>
+      </div>
+      <div>
+        <span>Turno:</span>
+        <label>
+          <input type="checkbox" class="filled-in" name="TURManhã" />
+          <span>Manhã</span>
+        </label>
+        <label>
+          <input type="checkbox" class="filled-in" name="TURTarde" />
+          <span>Tarde</span>
+        </label>
+        <label>
+          <input type="checkbox" class="filled-in" name="TURNoite" />
+          <span>Noite</span>
+        </label>
       </div>
     </div>
-    {{/each}}
+    <div class=" center-align filters-form-submit">
+      <input type="submit" class="btn waves-effect waves-light" style="color: #fafafa" name="action"
+        value="Filtrar por campus e horário">
+    </div>
+  </form>
+</div>
+
+{{#if produtos}}
+<div class="row">
+  {{#each produtos}}
+  <a href="/comprar-produto?id={{_id}}&emailVendedor={{userEmail}}">
+  <div class="col s6 m6" id="home-card-produto">
+    <div class="card small home-img-card">
+      <div class="card-image">
+        <img class="home-card-img" src="{{url}}">
+        <span class="card-title value-card-title">R${{valor}}</span>
+      </div>
+      <div class="card-content">
+        <p class="home-title-product">{{nome}}</p>
+        <p>{{descricao}}</p>
+        <p class="home-subtitle-product">Vendido por <b>{{userName}}</b></p>
+      </div>
+    </div>
   </div>
+  </a>
+  {{/each}}
+</div>
 {{else}}
-<h6 class="text-center">Não existem produtos a venda :( <br></h4>
+<div class="img-no-product-found">
+  <img src="../imgs/nocartIcon.png">
+</div>
+<p class="txt-no-product-found">Não existem produtos a venda. Que tal procurar com outros filtros?</p>
 {{/if}}

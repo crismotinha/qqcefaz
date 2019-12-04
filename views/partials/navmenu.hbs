@@ -1,13 +1,13 @@
 <nav>
   <div class="nav-wrapper">
     <a href="#!" class="brand-logo">qqcefaz?</a>
-    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <a href="#" data-target="mobile-demo" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
     <!-- Dropdown Trigger -->
-      <a class="dropdown-trigger" href="#!" data-target="dropdown1" data-alignment="right"><i class="material-icons right">import_export</i></a>
+    <div class="orderby"><a class="dropdown-trigger" href="#!" data-target="dropdown1" data-alignment="right"><i class="material-icons right" style="margin: 0 18px;">import_export</i></a></div>
   </div>
 </nav>
 <ul class="sidenav" id="mobile-demo">
-  <li class="profile"><img class="avatar-photo" src="https://www.petmd.com/sites/default/files/petmd-kitten-development.jpg"></li>
+  <li class="profile"><img class="avatar-photo" src="{{usuario.foto}}"></li>
   <li class="profile profile-name">{{usuario.nome}}</li>
   <li class="profile">{{usuario.email}}</li>
   <li class="divider"></li>

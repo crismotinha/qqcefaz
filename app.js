@@ -11,6 +11,12 @@ var indexRouter = require('./routes/index');
 var app = express();
 
 hbs.registerPartials(path.join(__dirname + '/views/partials'));
+
+hbs.registerHelper('hasElement', function(array, element, options) {
+    return array.includes(element) ? options.fn(this) : options.inverse(this);
+});
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
